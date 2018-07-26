@@ -725,10 +725,35 @@ app.controller("brandController",function($scope,$interval,$location,$routeParam
 app.controller("transferController",function($scope,stockManagement){
 	$scope.transferTitle = "Transfer Stock";
 	$scope.purchaseReqTitle = "Purchase Requested";
+	$scope.af = {};
 	stockManagement.getStockRequest()
 	.then(function(data){
 		$scope.stockReq = data;
-	})
+	});
+	$scope.assignStock = function(stock,index){
+		$('#assineeModal').modal('show');
+		$('#assineeModal').on('shown.bs.modal', function() {
+	        $scope.$evalAsync(function($scope){
+	        	var currentRequest = stock[0];
+	        	$scope.af.product_name = currentRequest.product_name;
+	        	$scope.af.stock_req = currentRequest.stock_unit;
+	        	$scope.af.reqId = currentRequest.id;
+	        	$scope.af.product_id = currentRequest.product_id;
+	        	$scope.af.user_id = currentRequest.user_id;
+	        	$scope.af.user_unique = currentRequest.user_unique;
+	        });   
+	    });
+	}
+	$('#assineeModal').submit(function(){
+		console.log($scope.af);
+		stockManagement.assignStock($scope.af)
+		.then(function(data){
+			console.log(data);
+		})
+
+	});
+	
+	
 
 });
 

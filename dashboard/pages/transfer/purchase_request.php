@@ -42,7 +42,7 @@
                             <td>{{sr.product_name}}</td>
                             <td>{{sr.stock_unit}}</td>
                             <td>{{sr.status}}</td>
-                            <td><span ng-click="assignStock(sr.id)"><i class="fa fa-fw fa-pencil"></i></span></td>
+                            <td><span ng-click="assignStock(stockReq,$index)"><i class="fa fa-fw fa-pencil"></i></span></td>
                         </tr>
                       </tbody>
                     </table>
@@ -53,4 +53,43 @@
         </div>
       </div>
     </section>
+
+     <!-- Modal -->
+    <div class="modal fade" id="assineeModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form name="assigneeForm" id="assigneeForm" >
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Assign Stock</h4>
+          </div>
+          <div class="modal-body">
+            <!-- <pre>{{currentRequest}}</pre> -->
+            <div class="form-group">
+              <label for="product_name">Product Name</label>
+              <input type="text" class="form-control" name="product_name" ng-model="af.product_name">
+            </div>
+            <div class="form-group">
+              <label for="stock_req">Stock Requested</label>
+              <input type="text" class="form-control" name="stock_req" ng-model="af.stock_req">
+            </div>
+            <div class="form-group">
+              <label for="stock_assigned">Stock Assigned</label>
+              <input type="text" class="form-control" name="stock_assigned" ng-model="af.stock_assigned">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+
 </main>

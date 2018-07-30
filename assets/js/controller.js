@@ -748,7 +748,26 @@ app.controller("transferController",function($scope,stockManagement){
 		console.log($scope.af);
 		stockManagement.assignStock($scope.af)
 		.then(function(data){
-			console.log(data);
+			$scope.response=data;
+			if($scope.response == '1-1-1'){
+				$.notify({
+					message: 'New User Added' 
+				},{
+					type: 'success'
+				});
+				setTimeout(function(){
+					location.reload();
+				},1000);
+				$('#createUserForm')[0].reset();
+			}else{
+				$.notify({
+					message: 'ERROR ! User Couldnot Be Added' 
+				},{
+					type: 'danger'
+				});
+			}
+			console.log("Form Res",$scope.response);
+		});
 		})
 
 	});

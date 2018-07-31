@@ -39,4 +39,21 @@ app.service("productManagement",function($http,$log){
             throw response;
 	    });
 	}
+	this.getProductStock = function(userkey){
+		var data = {};
+		data.userkey = userkey;
+
+		return $http({
+	        method : "POST",
+	        url : "../api/user/getUserProductStock.php",
+	        params: data,
+	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	    }).then(function success(response) {
+	        return response.data;
+	    }, function error(response) {
+	        $log.error('ERROR:', response);
+            throw response;
+	    });
+
+	}
 });

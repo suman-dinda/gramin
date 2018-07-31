@@ -771,11 +771,6 @@ app.controller("transferController",function($scope,stockManagement){
 		})
 
 	});
-	
-	
-
-});
-
 //transferController
 app.controller("viewUser",function($scope,$routeParams,$interval,userManagement){
 

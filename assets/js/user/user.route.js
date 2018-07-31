@@ -9,5 +9,11 @@ app.config(function($routeProvider) {
     .when("/requestProduct", {
         templateUrl : "pages/requestProduct.php"
     })
+    .when("/add_sales", {
+        templateUrl : "pages/sales/add_sales.php"
+    })
+    .when("/sales", {
+        templateUrl : "pages/sales/sales_list.php"
+    })
 
  });

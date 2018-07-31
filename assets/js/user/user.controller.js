@@ -104,7 +104,7 @@ app.controller('dashboardController', function($scope,dataPassing){
 });
 
 
-app.controller("viewSubordinates", function($scope,$location,dataPassing,userManagement){
+app.controller("viewSubordinates", function($scope,$rootScope,$location,dataPassing,userManagement){
 	$scope.title = "View Your SubOrdinates";
 	$scope.userType = dataPassing.getCookie('user_type');
 	console.log($scope.userType);
@@ -112,6 +112,7 @@ app.controller("viewSubordinates", function($scope,$location,dataPassing,userMan
 		$location.path('/user-dashboard');
 	}else{
 		$scope.key = dataPassing.getCookie('userkey');
+		$rootScope.key = $scope.key;
 		userManagement.getSubordinates($scope.key)
 		.then(function(response){
 			$scope.userData = response;
@@ -162,4 +163,88 @@ app.controller('requestProduct', function($scope,productManagement,stockManageme
 
 
 	 }
+});
+app.controller("salesController", function($scope,$rootScope,$filter,dataPassing,productManagement,saleManagement){
+	$scope.addSaleTitle = "Add Sales";
+	$scope.salesTitle = "Your Sales List";
+
+	$scope.cart = [];
+	$scope.formData = {};
+	$scope.totalcost = 0;
+	$scope.pquantity = 0;
+	$scope.userKey = $rootScope.key;
+	
+
+	var date = new Date();
+	var x = Math.floor((Math.random() * 10000) + 1);
+	$scope.formData.sale_no = "SL-"+x;
+
+	setTimeout(function(){
+	 	$('.datepicker').datepicker({
+	 		autoclose: true,
+	 		format: 'dd/mm/yyyy'
+	 	});
+	 	$('.datepicker').datepicker('setDate',date);
+	 	// $('.select2').select2()
+	}, 777);
+	productManagement.getProductStock($scope.userKey)
+	.then(function(response){
+		$scope.products = response;
+	});
+
+	
+	$scope.gi = function(){
+		var sum = 0;
+		$('.totalAmt').each(function(){
+			var value=$(this).text();
+			if(!isNaN(value) && value.length != 0) {
+		        sum += parseFloat(value);
+		    }
+		});
+		$scope.totalAmount = sum;
+		//alert(sum);
+	}
+	$scope.addtoCart = function(pid){
+		//alert(pid);
+		productManagement.getSingleProduct(pid)
+		.then(function(response){
+			$scope.cartData = response[0];
+			$scope.cart.push($scope.cartData);
+		})
+	}
+	$scope.storeTblValues = function(){
+		var TableData = new Array();
+		$('#cartTable tr').each(function(row, tr){
+        TableData[row]={
+            "product_code" : $(tr).find('td:eq(0)').text()
+            , "product_name" :$(tr).find('td:eq(1)').text()
+            , "product_category" : $(tr).find('td:eq(2)').text()
+            , "product_subcategory" : $(tr).find('td:eq(3)').text()
+            , "product_quantity" : $(tr).find('input').val()
+            , "product_mrp" : $(tr).find('td:eq(5)').text()
+            , "product_tax" : $(tr).find('td:eq(6)').text()
+            , "product_totprice" : $(tr).find('td:eq(7)').text()
+        }    
+    }); 
+		 TableData.shift();  // first row will be empty - so remove
+		return TableData;
+	}
+
+	$scope.addSale = function(){
+		$scope.formData.sale_date = $('#sale_date').val();
+		var TableData;
+		TableData = $scope.storeTblValues();
+		$scope.formData.cart = JSON.stringify(TableData);
+		$scope.formData.totalBill = $scope.totalAmount;
+		localStorage.setItem("printSale", $scope.formData);
+		
+		// saleManagement.createSale($scope.formData)
+		// .then(function(response){
+		// 	$scope.response = response;
+		// 	console.log(response);
+		// })
+		 window.open('http://localhost/gramin/print/print_bill.php', 'Print-Bill', 'width=500,height=400');
+		 dataPassing.setData($scope.formData);
+	}
+
 });

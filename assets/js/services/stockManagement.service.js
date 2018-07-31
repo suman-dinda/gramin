@@ -29,7 +29,7 @@ app.service("stockManagement",function($http,$log){
 	this.assignStock = function(data){
 		return $http({
 	        method : "POST",
-	        url : "../api/user/assignStock.php",
+	        url : "../api/assignStock.php",
 	        params: data,
 	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
 	    }).then(function success(response) {

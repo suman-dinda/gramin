@@ -6,7 +6,7 @@ $jsonData = array();
 if (isset($_REQUEST['userkey'])){
 	$key = $_REQUEST['userkey'];
 
-	$sql = "SELECT * FROM stock_list WHERE u_unique = '$key'";
+	$sql = "SELECT * FROM stock_list WHERE user_unique = '$key'";
 	
 	$result = $conn -> getAll($sql);
 	$nbrUsers = count($result);

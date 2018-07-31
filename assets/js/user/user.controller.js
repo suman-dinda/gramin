@@ -1,3 +1,6 @@
+app.run(function($rootScope,dataPassing){
+	$rootScope.key = dataPassing.getCookie('userkey');
+});
 app.controller('dashboardController', function($scope,dataPassing){
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
@@ -170,11 +173,11 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 
 	$scope.cart = [];
 	$scope.formData = {};
-	$scope.totalcost = 0;
-	$scope.pquantity = 0;
 	$scope.userKey = $rootScope.key;
 	
-
+cost = 0;
+	$scope.pquantity = 0;
+	$scope.use
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
 	$scope.formData.sale_no = "SL-"+x;
@@ -243,8 +246,16 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 		// 	$scope.response = response;
 		// 	console.log(response);
 		// })
-		 window.open('http://localhost/gramin/print/print_bill.php', 'Print-Bill', 'width=500,height=400');
-		 dataPassing.setData($scope.formData);
+		var GET = JSON.stringify($scope.formData);
+		 window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400');
+		 
 	}
 
 });
+// //printController
+// app.controller("printController",function($scope,$routeParams,$interval,userManagement,dataPassing){
+// 		$scope.salesprintTitle = "Print Sale";
+// 		console.log(dataPassing.getData());
+// 		$scope.printData = dataPassing.getData();
+// 		$scope.printData = "BumbleBee";
+// });

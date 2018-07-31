@@ -56,4 +56,5 @@ app.service("productManagement",function($http,$log){
 	    });
 
 	}
+	
 });

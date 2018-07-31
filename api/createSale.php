@@ -11,6 +11,7 @@ $sale_date = $_REQUEST['sale_date'];
 $sale_no = $_REQUEST['sale_no'];
 $sale_product = $_REQUEST['sale_product'];
 $sale_totalBill = $_REQUEST['totalBill'];
+$user_key = $_COOKIE['userkey'];
 $res ="";
 
 $cart = json_decode($_REQUEST['cart'],true);
@@ -23,10 +24,12 @@ for($i=0;$i<count($cart);$i++){
 	$pmrp = $cart[$i]['product_mrp'];
 	$ptax = $cart[$i]['product_tax'];
 
-	$sql = "INSERT INTO `sales` (`sale_no`,`sale_chalan`,`sale_date`,`sale_customer`,`sale_custmobile`,`sale_custlocation`,`sale_custaddress`,`sale_pcode`,`sale_pname`,`sale_pcategory`,`sale_psubcategory`,`sale_pquantity`,`sale_pmrp`,`sale_ptax`,`sale_totbill`,`sale_note`) VALUES('$sale_no','$sale_chalan','$sale_date','$sale_customer','$sale_custmobile','$sale_custlocation','$sale_custadd'.,'$pcode','$pname','$pcategory','$psubcategory','$pquantity','$pmrp','$ptax','$sale_totalBill','$sale_comment')";
+	$sql = "INSERT INTO `sales` (`sale_no`,`sale_chalan`,`sale_date`,`sale_customer`,`sale_custmobile`,`sale_custlocation`,`sale_custaddress`,`sale_pcode`,`sale_pname`,`sale_pcategory`,`sale_psubcategory`,`sale_pquantity`,`sale_pmrp`,`sale_ptax`,`sale_totbill`,`sale_note`,`sale_userunique`) VALUES('$sale_no','$sale_chalan','$sale_date','$sale_customer','$sale_custmobile','$sale_custlocation','$sale_custadd'.,'$pcode','$pname','$pcategory','$psubcategory','$pquantity','$pmrp','$ptax','$sale_totalBill','$sale_comment','$user_key')";
 
 	$result = $conn->execute($sql);
 	$res += $result;
+
+	$updateStock = '';
 }
 print_r($res)
 ?>

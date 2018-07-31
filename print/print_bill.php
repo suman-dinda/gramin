@@ -53,5 +53,7 @@
 <!-- FastClick -->
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/controller.js"></script>
+<script src="../assets/js/services/dataPassing.service.js"></script>
+<script src="../assets/js/services/userManagement.service.js"></script>
 </body>
 </html>

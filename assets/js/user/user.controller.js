@@ -1,5 +1,6 @@
 app.run(function($rootScope,dataPassing){
 	$rootScope.key = dataPassing.getCookie('userkey');
+
 });
 app.controller('dashboardController', function($scope,dataPassing){
 	$scope.titl = "User Dashboard";
@@ -167,7 +168,7 @@ app.controller('requestProduct', function($scope,productManagement,stockManageme
 
 	 }
 });
-app.controller("salesController", function($scope,$rootScope,$filter,dataPassing,productManagement,saleManagement){
+app.controller("salesController", function($scope,$rootScope,$filter,dataPassing,productManagement,saleManagement,userManagement){
 	$scope.addSaleTitle = "Add Sales";
 	$scope.salesTitle = "Your Sales List";
 
@@ -194,7 +195,11 @@ cost = 0;
 	.then(function(response){
 		$scope.products = response;
 	});
-
+	userManagement.getUserDetailsFromKey($scope.userKey)
+	.then(function(response){
+		var data = response[0];
+		$scope.formData.userFullName = data;
+	});
 	
 	$scope.gi = function(){
 		var sum = 0;
@@ -209,9 +214,12 @@ cost = 0;
 	}
 	$scope.addtoCart = function(pid){
 		//alert(pid);
+		var currentStock = $('#sale_product')[0].selectedOptions[0].getAttribute('data-stock')
+
 		productManagement.getSingleProduct(pid)
 		.then(function(response){
 			$scope.cartData = response[0];
+			$scope.cartData.stock = currentStock;
 			$scope.cart.push($scope.cartData);
 		})
 	}
@@ -224,9 +232,10 @@ cost = 0;
             , "product_category" : $(tr).find('td:eq(2)').text()
             , "product_subcategory" : $(tr).find('td:eq(3)').text()
             , "product_quantity" : $(tr).find('input').val()
-            , "product_mrp" : $(tr).find('td:eq(5)').text()
-            , "product_tax" : $(tr).find('td:eq(6)').text()
-            , "product_totprice" : $(tr).find('td:eq(7)').text()
+            , "product_stock" : $(tr).find('td:eq(5)').text()
+            , "product_mrp" : $(tr).find('td:eq(6)').text()
+            , "product_tax" : $(tr).find('td:eq(7)').text()
+            , "product_totprice" : $(tr).find('td:eq(8)').text()
         }    
     }); 
 		 TableData.shift();  // first row will be empty - so remove
@@ -239,14 +248,15 @@ cost = 0;
 		TableData = $scope.storeTblValues();
 		$scope.formData.cart = JSON.stringify(TableData);
 		$scope.formData.totalBill = $scope.totalAmount;
-		localStorage.setItem("printSale", $scope.formData);
+		//localStorage.setItem("printSale", $scope.formData);
 		
 		// saleManagement.createSale($scope.formData)
 		// .then(function(response){
 		// 	$scope.response = response;
 		// 	console.log(response);
 		// })
-		var GET = JSON.stringify($scope.formData);
+		var GET = btoa(JSON.stringify($scope.formData));
+		console.log(GET);
 		 window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400');
 		 
 	}

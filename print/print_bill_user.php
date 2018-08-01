@@ -35,9 +35,11 @@
         <div class="col-md-12">
           <div class="box box-primary">
               <?php
-                
-                $jsonData = json_decode($_GET['data'],true);
-               // print_r($jsonData);
+                $x = base64_decode($_GET['data']);
+
+                $jsonData = json_decode($x,true);
+                // print_r($jsonData);
+                // die();
                   print($jsonData['sale_no']);
                echo $jsonData['sale_product'];
                
@@ -46,7 +48,13 @@
                echo $jsonData['sale_date'];
                echo $jsonData['totalBill'];
                $cart = json_decode($jsonData['cart'],true);
-
+               $uDetails = $jsonData['userFullName'];
+               echo $uDetails['u_firstname'];
+               // $userDetails = json_decode($jsonData['userFullName'],true);
+               // print_r($userDetails);
+               // $u_fullname = $userDetails['u_firstname']." ".$userDetails['u_lastname'];
+               // $u_mobile = $userDetails['u_mobile'];
+               // echo $u_fullname. " ********* ".$u_mobile;
 
                
                for($i=0;$i<count($cart);$i++){

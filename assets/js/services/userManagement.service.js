@@ -71,5 +71,19 @@ app.service("userManagement",function($http,$log){
             throw response;
 		});
 	}
+	this.getUserDetailsFromKey = function(userkey){
+		var data = {userkey:userkey};
+		return $http({
+			method : "POST",
+	        url : "../api/getUserFromKey.php",
+	        params: data,
+	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	    }).then(function success(response){
+			return response.data;
+		},function error(response){
+			$log.error('ERROR:', response);
+            throw response;
+		});
+	}
 
 });

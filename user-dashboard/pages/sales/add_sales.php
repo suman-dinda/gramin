@@ -38,8 +38,8 @@
                       </div>
                       <div class="form-group">
                         <label for="sale_product">Select Product</label>
-                        <select class="form-control select2" name="sale_product" ng-model="formData.sale_product" ng-change="addtoCart(formData.sale_product)">
-                          <option ng-repeat="prd in products" value="{{prd.id}}">{{prd.product_name}}</option>
+                        <select class="form-control select2" name="sale_product" ng-model="formData.sale_product" id="sale_product" ng-change="addtoCart(formData.sale_product)">
+                          <option ng-repeat="prd in products" data-stock="{{prd.stock_unit}}" value="{{prd.id}}">{{prd.product_name}}</option>
                         </select>
                       </div>
                     </div>
@@ -77,6 +77,7 @@
                               <th>Product Category</th>
                               <th>Product SubCategory</th>
                               <th>Quantity</th>
+                              <th>Current Stock</th>
                               <th>Product MRP</th>
                               <th>Tax</th>
                               <th>Total Cost</th>
@@ -89,6 +90,7 @@
                               <td>{{c.product_category}}</td>
                               <td>{{c.product_subcategory}}</td>
                               <td><input type="text" name="pquantity" ng-model="pquantity" class="form-control" ></td>
+                              <td>{{c.stock - pquantity}}</td>
                               <td>{{c.product_cost}}</td>
                               <td>{{c.product_tax}}</td>
                               <td class="totalAmt">{{(pquantity * c.product_cost) + (pquantity*c.product_cost*(c.product_tax/100))}}</td>

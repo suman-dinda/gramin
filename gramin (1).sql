@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 31, 2018 at 09:12 PM
+-- Generation Time: Aug 02, 2018 at 08:29 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -170,15 +170,23 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `sale_pcode` varchar(20) NOT NULL,
   `sale_pname` varchar(50) NOT NULL,
   `sale_pcategory` varchar(30) NOT NULL,
-  `sale_psubcategory` varchar(50) NOT NULL,
+  `sale_pid` varchar(10) NOT NULL,
   `sale_pquantity` varchar(10) NOT NULL,
   `sale_pmrp` varchar(10) NOT NULL,
   `sale_ptax` varchar(10) NOT NULL,
   `sale_totbill` varchar(15) NOT NULL,
   `sale_note` text NOT NULL,
   `sale_userunique` varchar(10) NOT NULL,
+  `sale_paymode` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`id`, `sale_no`, `sale_chalan`, `sale_date`, `sale_customer`, `sale_custmobile`, `sale_custlocation`, `sale_custaddress`, `sale_pcode`, `sale_pname`, `sale_pcategory`, `sale_pid`, `sale_pquantity`, `sale_pmrp`, `sale_ptax`, `sale_totbill`, `sale_note`, `sale_userunique`, `sale_paymode`) VALUES
+(1, 'SL-4386', 'wertyu', '03/08/2018', 'Suman Dinda', '08050986742', 'Chennai', 'SIruseri', 'SKU-1531328997147', 'productName', 'Shirts', '1', '2', '12000', '5', '25200', 'ok', 'hSDAeop', NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `stock_list` (
 --
 
 INSERT INTO `stock_list` (`id`, `product_id`, `product_name`, `user_unique`, `user_id`, `stock_requested`, `stock_unit`, `req_id`, `status`) VALUES
-(1, 1, 'productName', 'hSDAeop', 1, 100, 100, 4, 1);
+(1, 1, 'productName', 'hSDAeop', 1, 100, 98, 4, 1);
 
 -- --------------------------------------------------------
 

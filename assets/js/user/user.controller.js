@@ -228,9 +228,9 @@ cost = 0;
 		$('#cartTable tr').each(function(row, tr){
         TableData[row]={
             "product_code" : $(tr).find('td:eq(0)').text()
-            , "product_name" :$(tr).find('td:eq(1)').text()
-            , "product_category" : $(tr).find('td:eq(2)').text()
-            , "product_subcategory" : $(tr).find('td:eq(3)').text()
+            , "product_id" :$(tr).find('td:eq(1)').text()
+            , "product_name" :$(tr).find('td:eq(2)').text()
+            , "product_category" : $(tr).find('td:eq(3)').text()
             , "product_quantity" : $(tr).find('input').val()
             , "product_stock" : $(tr).find('td:eq(5)').text()
             , "product_mrp" : $(tr).find('td:eq(6)').text()
@@ -250,15 +250,23 @@ cost = 0;
 		$scope.formData.totalBill = $scope.totalAmount;
 		//localStorage.setItem("printSale", $scope.formData);
 		
-		// saleManagement.createSale($scope.formData)
-		// .then(function(response){
-		// 	$scope.response = response;
-		// 	console.log(response);
-		// })
-		var GET = btoa(JSON.stringify($scope.formData));
-		console.log(GET);
-		 window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400');
-		 
+		saleManagement.createSale($scope.formData)
+		.then(function(response){
+			$scope.response = response;
+			if($scope.response == "1-1"){
+				var GET = btoa(JSON.stringify($scope.formData));
+				$('#add_sale_form')[0].reset();
+				window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+			}else{
+				$.notify({
+					message: 'Error in adding sale' 
+				},{
+					type: 'danger'
+				});
+				$('#add_sale_form')[0].reset();
+			}
+		});
+		
 	}
 
 });

@@ -41,9 +41,20 @@
     .total-amount-section{
       background: #ccc;font-family: fantasy;
     }
+    #prod_thead{
+      background: #ddd !important;
+    }
     @media print {
         .total-amount-section{
-          background: #ccc;font-family: fantasy;
+          background: #eee !important;font-family: fantasy;
+          padding-top: 1px !important;
+          padding-bottom: 1px !important;
+          -webkit-print-color-adjust: exact;
+        }
+    }
+    @media print{
+       #prod_thead th{
+          background-color: #ccc !important;
           -webkit-print-color-adjust: exact;
         }
     }
@@ -110,7 +121,7 @@
                   </tr>
               </table>
               <table class="table table-striped" style="margin-bottom: 50px">
-                <thead style="background: #ddd">
+                <thead id="prod_thead">
                   <tr>
                     <th>Sl No.</th>
                     <th>ProductCode</th>

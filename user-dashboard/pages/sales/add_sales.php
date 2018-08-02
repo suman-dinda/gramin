@@ -22,7 +22,6 @@
                 </div>
                 <div class="box-body">
                   <div class="row">
-                    {{formData}}
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="sale_date">Date</label>
@@ -37,9 +36,13 @@
                         <input type="text" class="form-control" name="sale_chalan" id="sale_chalan" ng-model="formData.sale_chalan">
                       </div>
                       <div class="form-group">
+                        <label for="sale_payment">Payment Mode</label>
+                        <input type="text" class="form-control" name="sale_payment" id="sale_payment" ng-model="formData.sale_payment">
+                      </div>
+                      <div class="form-group">
                         <label for="sale_product">Select Product</label>
                         <select class="form-control select2" name="sale_product" ng-model="formData.sale_product" id="sale_product" ng-change="addtoCart(formData.sale_product)">
-                          <option ng-repeat="prd in products" data-stock="{{prd.stock_unit}}" value="{{prd.id}}">{{prd.product_name}}</option>
+                          <option ng-repeat="prd in products" data-id="{{prd.product_id}}" data-stock="{{prd.stock_unit}}" value="{{prd.id}}">{{prd.product_name}}</option>
                         </select>
                       </div>
                     </div>
@@ -73,9 +76,9 @@
                           <thead>
                             <tr>
                               <th>Product Code</th>
+                              <th>Product ID</th>
                               <th>Product Name</th>
                               <th>Product Category</th>
-                              <th>Product SubCategory</th>
                               <th>Quantity</th>
                               <th>Current Stock</th>
                               <th>Product MRP</th>
@@ -86,10 +89,10 @@
                           <tbody>
                             <tr ng-repeat="c in cart">
                               <td>{{c.product_code}}</td>
+                              <td>{{c.id}}</td>
                               <td>{{c.product_name}}</td>
                               <td>{{c.product_category}}</td>
-                              <td>{{c.product_subcategory}}</td>
-                              <td><input type="text" name="pquantity" ng-model="pquantity" class="form-control" ></td>
+                              <td><input type="number" name="pquantity" ng-model="pquantity" class="form-control" min="1" max="{{c.stock}}"></td>
                               <td>{{c.stock - pquantity}}</td>
                               <td>{{c.product_cost}}</td>
                               <td>{{c.product_tax}}</td>

@@ -16,6 +16,38 @@
     html,body{
       font-family: 'Comfortaa', cursive;
     }
+    .right{
+      text-align: right;
+    }
+    .center{
+      text-align: center;
+    }
+    .left{
+      text-align: left;
+    }
+    .signature{
+        text-align: center;
+        width: 20%;
+        position: absolute;
+        right: 2%;
+        margin-top: 5%;
+        border-top: 1px solid #ccc;
+    }
+    td.cust-dashed {
+        padding: 1.5%;
+        border-bottom: 1px dashed;
+    }
+    .full-width{width: 100%;}
+    .total-amount-section{
+      background: #ccc;font-family: fantasy;
+    }
+    @media print {
+        .total-amount-section{
+          background: #ccc;font-family: fantasy;
+          -webkit-print-color-adjust: exact;
+        }
+    }
+    /*@page { size: auto;  margin: 5mm; padding: 2mm; }*/
   </style>
 </head>
 <body>
@@ -38,64 +70,91 @@
                 $x = base64_decode($_GET['data']);
 
                 $jsonData = json_decode($x,true);
-                // print_r($jsonData);
-                // die();
-                  print($jsonData['sale_no']);
-               echo $jsonData['sale_product'];
-               
-               echo $jsonData['sale_chalan'];
-               echo $jsonData['internal_note'];
-               echo $jsonData['sale_date'];
-               echo $jsonData['totalBill'];
-               $cart = json_decode($jsonData['cart'],true);
-               $uDetails = $jsonData['userFullName'];
-               echo $uDetails['u_firstname'];
-               // $userDetails = json_decode($jsonData['userFullName'],true);
-               // print_r($userDetails);
-               // $u_fullname = $userDetails['u_firstname']." ".$userDetails['u_lastname'];
-               // $u_mobile = $userDetails['u_mobile'];
-               // echo $u_fullname. " ********* ".$u_mobile;
-
-               
-               for($i=0;$i<count($cart);$i++){
-                  echo $cart[$i]['product_code'];
-                  echo $cart[$i]['product_name'];
-                  echo $cart[$i]['product_category'];
-                  echo $cart[$i]['product_subcategory'];
-                  echo $cart[$i]['product_quantity'];
-                  echo $cart[$i]['product_tax'];
-                  echo $cart[$i]['product_totprice'];
-
-               }
-
+                $cart = json_decode($jsonData['cart'],true);
+                $uDetails = $jsonData['userFullName'];
               ?>
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4"> 
-                    <?php
-                      echo "Name: ".$jsonData['sale_customer']."<br>";
-                      echo $jsonData['sale_custadd']."<br>";
-                      echo $jsonData['sale_custlocation'];
-
-
-
-
-                    ?>
-                  </div>
-                  <div class="col-md-4">
-                    <?php
-                        echo "M: ".$jsonData['sale_custmobile'];
-                      ?>
-                  </div>
-                  <div class="col-md-4">
-                       <?php
-                        print("Sale Number: ".$jsonData['sale_no'])." <br>";
-                        echo 'Date: '.$jsonData['sale_date']
-
-                      ?>
-                  </div>
+              <table align="center" class="table details-section">
+                  <tr>
+                    <td class="left">
+                        <table class="full-width">
+                          <tr>
+                            <td>Customer Name :&nbsp;</td>
+                            <td class="cust-dashed"><?php echo $jsonData['sale_customer'];?></td>
+                          </tr>
+                          <tr>
+                            <td>Customer Address :&nbsp;</td>
+                            <td class="cust-dashed"><?php echo $jsonData['sale_custadd'].", ".$jsonData['sale_custlocation']; ?></td>
+                          </tr>
+                        </table>
+                    </td>
+                    <td class="center">
+                      <table class="full-width">
+                        <tr>
+                          <td>Mobile :&nbsp;</td>
+                          <td class="cust-dashed"><?php echo $jsonData['sale_custmobile']; ?></td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td class="center">
+                        <table class="full-width">
+                        <tr>
+                          <td>Sale No. :&nbsp;</td>
+                          <td class="cust-dashed"><?php print($jsonData['sale_no']); ?></td>
+                        </tr>
+                        <tr>
+                          <td>Date :&nbsp;</td>
+                          <td class="cust-dashed"><?php echo $jsonData['sale_date']; ?></td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+              </table>
+              <table class="table table-striped" style="margin-bottom: 50px">
+                <thead style="background: #ddd">
+                  <tr>
+                    <th>Sl No.</th>
+                    <th>ProductCode</th>
+                    <th>ProductName</th>
+                    <th>ProductCategory</th>
+                    <th>ProductQuantity</th>
+                    <th>Tax</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                      for($i=0;$i<count($cart);$i++){
+                        $count = $i;
+                        ++$count;
+                  ?>
+                      <tr>
+                        <td><?php echo $count; ?></td>
+                        <td><?php echo $cart[$i]['product_code']; ?></td>
+                        <td><?php echo $cart[$i]['product_name']; ?></td>
+                        <td><?php echo $cart[$i]['product_category']; ?></td>
+                        <td><?php echo $cart[$i]['product_quantity']; ?></td>
+                        <td><?php echo $cart[$i]['product_tax']; ?></td>
+                        <td><?php echo $cart[$i]['product_totprice']; ?></td>
+                      </tr>
+                  <?php
+                    }
+                  ?>
+                </tbody>
+              </table>
+              <div class="col-md-12 total-amount-section">
+                <h4 align="right">Total Amount : <?php echo $jsonData['totalBill']."/-"; ?></h4>
+              </div>
+              <div class="right">
+                <div align="right" class="signature">
+                  <p class="center">
+                    <h5><?php echo $uDetails['u_firstname']." ".$uDetails['u_lastname'];?></h5>
+                    <p>
+                      <strong>-Sale Authorised By-</strong>
+                    </p>
+                  </p>
                 </div>
               </div>
+              
           </div>
         </div>
       </div>

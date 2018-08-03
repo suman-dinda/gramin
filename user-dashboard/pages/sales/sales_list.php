@@ -22,7 +22,7 @@
               <div class="box-body">
                 <div class="row">
                   <div class="col-md-12">
-                    <table class="table dataTable">
+                    <table class="table dataTable" ng-init="getUserSale()">
                       <thead>
                         <tr>
                           <th>Sale Id</th>
@@ -33,12 +33,12 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="sale in sale_list">
+                        <tr ng-repeat="sale in saleList">
                             <td>{{sale.id}}</td>
-                            <td>{{sale.subcategory_name}}</td>
-                            <td>{{sale.category_name}}</td>
-                            <td>{{sale.subcategory_desc}}</td>
-                            <td><span ng-click="editCSB(sale.id)"><i class="fa fa-fw fa-pencil"></i></span> &nbsp;<span ng-click="deleteCSB(sale.id)"><i class="fa fa-fw fa-trash"></i></span></td>
+                            <td>{{sale.sale_date}}</td>
+                            <td>{{sale.sale_customer}}</td>
+                            <td>{{sale.sale_totbill}}</td>
+                            <td><span ng-click="viewSaleDetails(sale, $index)"><i class="fa fa-fw fa-eye"></i></span></td>
                         </tr>
                       </tbody>
                     </table>

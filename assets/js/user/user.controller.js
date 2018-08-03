@@ -176,7 +176,7 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 	$scope.formData = {};
 	$scope.userKey = $rootScope.key;
 	
-cost = 0;
+	cost = 0;
 	$scope.pquantity = 0;
 	$scope.use
 	var date = new Date();
@@ -277,3 +277,7 @@ cost = 0;
 // 		$scope.printData = dataPassing.getData();
 // 		$scope.printData = "BumbleBee";
 // });
+//sellService
+app.controller("sellService",function($scope){
+	$scope.titl = "Sell Service";	
+});

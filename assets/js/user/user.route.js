@@ -12,8 +12,12 @@ app.config(function($routeProvider) {
     .when("/add_sales", {
         templateUrl : "pages/sales/add_sales.php"
     })
+    .when("/sell_service", {
+        templateUrl : "pages/sellService.php"
+    })
     .when("/sales", {
         templateUrl : "pages/sales/sales_list.php"
     })
+    
 
  });

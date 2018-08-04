@@ -315,7 +315,22 @@ app.controller("sellService",function($scope,serviceManagement){
 		$scope.formData.service = document.getElementById('service').selectedOptions[0].innerHTML;
 		serviceManagement.requestService($scope.formData)
 		.then(function(data){
-			console.log(data);
+			$scope.response = data;
+			if($scope.response==1){
+				$.notify({
+					message: 'Service Request Sent' 
+				},{
+					type: 'success'
+				});
+				$('#requestService')[0].reset();
+				
+			}else{
+				$.notify({
+					message: 'Service Request Failed' 
+				},{
+					type: 'danger'
+				});
+			}
 		})
 	}
 });

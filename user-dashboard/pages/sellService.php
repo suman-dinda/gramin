@@ -18,7 +18,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Book Service</h3>
               </div>
-              <form role="form" id="requestProduct" ng-submit="requestService()">
+              <form role="form" id="requestService" ng-submit="requestService()">
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-12">

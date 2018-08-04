@@ -175,10 +175,7 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 	$scope.cart = [];
 	$scope.formData = {};
 	$scope.userKey = $rootScope.key;
-	
-	cost = 0;
 	$scope.pquantity = 0;
-	$scope.use
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
 	$scope.formData.sale_no = "SL-"+x;
@@ -292,6 +289,33 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 // 		$scope.printData = "BumbleBee";
 // });
 //sellService
-app.controller("sellService",function($scope){
-	$scope.titl = "Sell Service";	
+app.controller("sellService",function($scope,serviceManagement){
+	$scope.titl = "Sell Service";
+	$scope.formData = {};
+	var date = new Date();
+
+	setTimeout(function(){
+	 	$('.datepicker').datepicker({
+	 		autoclose: true,
+	 		format: 'dd/mm/yyyy'
+	 	});
+	 	$('.datepicker').datepicker('setDate',date);
+	 	// $('.select2').select2()
+	}, 777);
+	serviceManagement.getService()
+	.then(function(data){
+		$scope.services = data;
+	});
+	$scope.getServiceAmount = function(data){
+		$scope.formData.service_cost = data.service_price;
+	}
+
+	$scope.requestService = function(){
+		$scope.formData.sell_date = document.getElementById('sell_date').value;
+		$scope.formData.service = document.getElementById('service').selectedOptions[0].innerHTML;
+		serviceManagement.requestService($scope.formData)
+		.then(function(data){
+			console.log(data);
+		})
+	}
 });

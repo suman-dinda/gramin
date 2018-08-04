@@ -676,6 +676,7 @@ $username = $_COOKIE['user_name'];
 <script src="../assets/js/services/productManagement.service.js"></script>
 <script src="../assets/js/services/stockManagement.service.js"></script>
 <script src="../assets/js/services/saleManagement.service.js"></script>
+<script src="../assets/js/services/serviceManagement.service.js"></script>
 <script src="../assets/js/user/user.controller.js"></script>
 </body>
 </html>

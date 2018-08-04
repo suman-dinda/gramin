@@ -25,7 +25,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="sale_date">Date</label>
-                        <input type="text" class="form-control datepicker" name="sale_date" id="sale_date" ng-model="formData.sale_date">
+                        <input type="text" class="form-control datepicker" name="sale_date" id="sale_date" ng-model="formData.sale_date" required>
                       </div>
                       <div class="form-group">
                         <label for="sale_no">Reference No.</label>
@@ -33,15 +33,15 @@
                       </div>
                       <div class="form-group">
                         <label for="sale_chalan">Chalan No</label>
-                        <input type="text" class="form-control" name="sale_chalan" id="sale_chalan" ng-model="formData.sale_chalan">
+                        <input type="text" class="form-control" name="sale_chalan" id="sale_chalan" ng-model="formData.sale_chalan" required>
                       </div>
                       <div class="form-group">
                         <label for="sale_payment">Payment Mode</label>
-                        <input type="text" class="form-control" name="sale_payment" id="sale_payment" ng-model="formData.sale_payment">
+                        <input type="text" class="form-control" name="sale_payment" id="sale_payment" ng-model="formData.sale_payment" required>
                       </div>
                       <div class="form-group">
                         <label for="sale_product">Select Product</label>
-                        <select class="form-control select2" name="sale_product" ng-model="formData.sale_product" id="sale_product" ng-change="addtoCart(formData.sale_product)">
+                        <select class="form-control select2" name="sale_product" ng-model="formData.sale_product" id="sale_product" ng-change="addtoCart(formData.sale_product)" required>
                           <option ng-repeat="prd in products" data-id="{{prd.product_id}}" data-stock="{{prd.stock_unit}}" value="{{prd.id}}">{{prd.product_name}}</option>
                         </select>
                       </div>
@@ -53,19 +53,19 @@
                       <div class="box-body">
                           <div class="form-group">
                             <label for="sale_customer">Customer Name</label>
-                            <input type="text" class="form-control" name="sale_customer" id="sale_customer" ng-model="formData.sale_customer">
+                            <input type="text" class="form-control" name="sale_customer" id="sale_customer" ng-model="formData.sale_customer" required>
                           </div>
                           <div class="form-group">
                             <label for="sale_custmobile">Customer Mobile</label>
-                            <input type="text" class="form-control" name="sale_custmobile" id="sale_custmobile" ng-model="formData.sale_custmobile">
+                            <input type="text" class="form-control" name="sale_custmobile" id="sale_custmobile" ng-model="formData.sale_custmobile" required>
                           </div>
                           <div class="form-group">
                             <label for="sale_custlocation">Customer Location</label>
-                            <input type="text" class="form-control" name="sale_custlocation" id="sale_custlocation" ng-model="formData.sale_custlocation">
+                            <input type="text" class="form-control" name="sale_custlocation" id="sale_custlocation" ng-model="formData.sale_custlocation" required>
                           </div>
                           <div class="form-group">
                             <label for="sale_custadd">Customer Address</label>
-                            <textarea class="form-control" name="sale_custadd" id="sale_custadd" ng-model="formData.sale_custadd"></textarea>
+                            <textarea class="form-control" name="sale_custadd" id="sale_custadd" ng-model="formData.sale_custadd" required></textarea>
                           </div>
                       </div>
                     </div>
@@ -126,7 +126,7 @@
                               <div class="tab-content">
                                 <div class="tab-pane active" id="internal_note">
                                   <textarea class="col-sm-12 form-control" id="note" name="internal_note" ng-model="formData.internal_note" value=""></textarea>
-                                  <span style="color:red;" id="err_note"></span>
+                                  <span style="color:red;" id="err_note" required></span>
                                 </div>
                               </div>
                             </div>

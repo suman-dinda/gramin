@@ -212,6 +212,20 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 		$scope.totalAmount = sum;
 		//alert(sum);
 	}
+	
+	$scope.getUserSale = function(){
+		saleManagement.getSaleDataForUser($scope.userKey)
+		.then(function(data){
+			$scope.saleList = data;
+			console.log(data);
+		});
+	}
+
+	$scope.viewSaleDetails = function(sale, index){
+		console.log(sale);
+		console.log(index);
+	}
+
 	$scope.addtoCart = function(pid){
 		//alert(pid);
 		var currentStock = $('#sale_product')[0].selectedOptions[0].getAttribute('data-stock')

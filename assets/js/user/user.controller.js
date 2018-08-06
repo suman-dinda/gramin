@@ -289,9 +289,11 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 // 		$scope.printData = "BumbleBee";
 // });
 //sellService
-app.controller("sellService",function($scope,serviceManagement){
+app.controller("sellService",function($scope,$rootScope,serviceManagement){
 	$scope.titl = "Sell Service";
+	$scope.ServiceList = "Service List";
 	$scope.formData = {};
+	$scope.userKey = $rootScope.key;
 	var date = new Date();
 
 	setTimeout(function(){
@@ -312,7 +314,7 @@ app.controller("sellService",function($scope,serviceManagement){
 
 	$scope.requestService = function(){
 		$scope.formData.sell_date = document.getElementById('sell_date').value;
-		$scope.formData.service = document.getElementById('service').selectedOptions[0].innerHTML;
+		$scope.formData.service_name = document.getElementById('service').selectedOptions[0].innerHTML;
 		serviceManagement.requestService($scope.formData)
 		.then(function(data){
 			$scope.response = data;
@@ -332,5 +334,12 @@ app.controller("sellService",function($scope,serviceManagement){
 				});
 			}
 		})
+	}
+
+	$scope.getIndividualServiceList = function(){
+		serviceManagement.getIndividualServiceList($scope.userKey)
+		.then(function(data){
+			$scope.serviceList = data;
+		});
 	}
 });

@@ -353,13 +353,14 @@ $username = $_COOKIE['user_name'];
         </li>
         <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>Sell Service</span>
+            <i class="fa fa-dashboard"></i> <span>Services</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li class="active"><a href="#!sell_service"><i class="fa fa-circle-o"></i> Sell Service</a></li>
+            <li class="active"><a href="#!service_list"><i class="fa fa-circle-o"></i> Service List</a></li>
           </ul>
         </li>
         <li class="treeview">

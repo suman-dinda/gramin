@@ -38,4 +38,19 @@ app.service("serviceManagement",function($http,$log){
             throw response;
 	    });
 	 }
+
+	 this.getIndividualServiceList = function(userkey){
+	 	var data = {userKey:userkey};
+	 	return $http({
+	        method : "POST",
+	        url : "../api/user/getIndividualServiceList.php",
+	        params: data,
+	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	    }).then(function success(response) {
+	        return response.data;
+	    }, function error(response) {
+	        $log.error('ERROR:', response);
+            throw response;
+	    });
+	 }
 });

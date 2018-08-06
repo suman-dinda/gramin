@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 02, 2018 at 08:29 PM
+-- Generation Time: Aug 06, 2018 at 03:09 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -187,6 +187,34 @@ CREATE TABLE IF NOT EXISTS `sales` (
 
 INSERT INTO `sales` (`id`, `sale_no`, `sale_chalan`, `sale_date`, `sale_customer`, `sale_custmobile`, `sale_custlocation`, `sale_custaddress`, `sale_pcode`, `sale_pname`, `sale_pcategory`, `sale_pid`, `sale_pquantity`, `sale_pmrp`, `sale_ptax`, `sale_totbill`, `sale_note`, `sale_userunique`, `sale_paymode`) VALUES
 (1, 'SL-4386', 'wertyu', '03/08/2018', 'Suman Dinda', '08050986742', 'Chennai', 'SIruseri', 'SKU-1531328997147', 'productName', 'Shirts', '1', '2', '12000', '5', '25200', 'ok', 'hSDAeop', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_request`
+--
+
+DROP TABLE IF EXISTS `service_request`;
+CREATE TABLE IF NOT EXISTS `service_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_name` varchar(20) NOT NULL,
+  `service_amount` int(10) NOT NULL,
+  `service_date` varchar(15) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_mobile` varchar(15) NOT NULL,
+  `customer_address` text NOT NULL,
+  `payment_mode` varchar(20) NOT NULL,
+  `userkey` varchar(10) DEFAULT NULL,
+  `status` int(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `service_request`
+--
+
+INSERT INTO `service_request` (`id`, `service_name`, `service_amount`, `service_date`, `customer_name`, `customer_mobile`, `customer_address`, `payment_mode`, `userkey`, `status`) VALUES
+(3, 'Pan Card', 100, '05/08/2018', 'Suman Dinda', '08050986742', 'SIruseri', 'cash', 'hSDAeop', 1);
 
 -- --------------------------------------------------------
 

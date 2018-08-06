@@ -639,7 +639,7 @@ app.controller("transferController",function($scope,stockManagement){
 		$('#assineeModal').modal('show');
 		$('#assineeModal').on('shown.bs.modal', function() {
 	        $scope.$evalAsync(function($scope){
-	        	var currentRequest = stock[0];
+	        	var currentRequest = stock[index];
 	        	$scope.af.product_name = currentRequest.product_name;
 	        	$scope.af.stock_req = currentRequest.stock_unit;
 	        	$scope.af.reqId = currentRequest.id;

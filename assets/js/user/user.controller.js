@@ -226,8 +226,8 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 	$scope.addtoCart = function(pid){
 		//alert(pid);
 		var currentStock = $('#sale_product')[0].selectedOptions[0].getAttribute('data-stock')
-
-		productManagement.getSingleProduct(pid)
+		var currentPid = $('#sale_product')[0].selectedOptions[0].getAttribute('data-id');
+		productManagement.getSingleProduct(currentPid)
 		.then(function(response){
 			$scope.cartData = response[0];
 			$scope.cartData.stock = currentStock;

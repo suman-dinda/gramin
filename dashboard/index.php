@@ -1,6 +1,17 @@
 <?php
 session_start();
-$username = $_SESSION['username'];
+if(isset($_SESSION['username'])){
+  $username = $_SESSION['username'];
+}else{
+  ?>
+  <script type="text/javascript">
+    if(window.location.hostname == "localhost")
+      location.href= window.location.protocol+"//"+window.location.hostname+"/gramin/admin/";
+    else
+      location.href= window.location.protocol+"//"+window.location.hostname+"/admin/";
+  </script>
+<?php }
+
 ?>
 <!DOCTYPE html>
 <html ng-app="gramin">
@@ -287,7 +298,7 @@ $username = $_SESSION['username'];
                   <a class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a class="btn btn-default btn-flat">Sign out</a>
+                  <a class="btn btn-default btn-flat" onclick="logout()">Sign out</a>
                 </div>
               </li>
             </ul>

@@ -2,7 +2,7 @@ app.run(function($rootScope,dataPassing){
 	$rootScope.key = dataPassing.getCookie('userkey');
 
 });
-app.controller('dashboardController', function($scope,dataPassing){
+app.controller('dashboardController', function($scope,$http,$location,dataPassing){
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
 	$scope.subown = 'true';
@@ -97,6 +97,37 @@ app.controller('dashboardController', function($scope,dataPassing){
 	  });
 
 	//dashboard js end
+	$scope.logout = function(){
+		$http({
+	        method : "POST",
+	        url : "../api/logout/logout-user.php",
+	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	    }).then(function success(response) {
+	        if(response.data == '1'){
+	        	$.notify({
+					message: 'Logged Out Successfully. Redirecting Login' 
+				},{
+					type: 'success'
+				});
+	        	setTimeout(function(){
+	        		if(window.location.hostname == "localhost")
+	        			location.href= window.location.protocol+"//"+window.location.hostname+"/gramin/user/";
+	        		else
+	        			location.href= window.location.protocol+"//"+window.location.hostname+"/user/";
+	        	},1000);
+
+	        }else{
+	        	$.notify({
+					message: 'LoggingOut Failed' 
+				},{
+					type: 'danger'
+				});
+	        }
+	    }, function error(response) {
+            throw response;
+	    });
+	}
+
 	setTimeout(function(){
 		$('#sidebar > li > a').each(function(i,v){
 			var temp = $(this).attr('href');

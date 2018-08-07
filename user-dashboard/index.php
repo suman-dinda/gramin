@@ -1,6 +1,15 @@
 <?php
-session_start();
-$username = $_COOKIE['user_name'];
+if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE['user_type']) && isset($_COOKIE['userkey'])){
+  $username = $_COOKIE['user_name'];
+}else{
+  ?>
+  <script type="text/javascript">
+    if(window.location.hostname == "localhost")
+      location.href= window.location.protocol+"//"+window.location.hostname+"/gramin/user/";
+    else
+      location.href= window.location.protocol+"//"+window.location.hostname+"/user/";
+  </script>
+<?php }
 ?>
 <!DOCTYPE html>
 <html ng-app="graminUser">
@@ -287,7 +296,7 @@ $username = $_COOKIE['user_name'];
                   <a class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a class="btn btn-default btn-flat">Sign out</a>
+                  <a class="btn btn-default btn-flat" ng-click="logout()">Sign out</a>
                 </div>
               </li>
             </ul>

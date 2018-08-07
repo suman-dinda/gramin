@@ -319,6 +319,8 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement){
 		.then(function(data){
 			$scope.response = data;
 			if($scope.response==1){
+				var GET = btoa(JSON.stringify($scope.formData));
+				window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
 				$.notify({
 					message: 'Service Request Sent' 
 				},{

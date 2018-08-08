@@ -320,7 +320,7 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 // 		$scope.printData = "BumbleBee";
 // });
 //sellService
-app.controller("sellService",function($scope,$rootScope,serviceManagement){
+app.controller("sellService",function($scope,$rootScope,serviceManagement,userManagement){
 	$scope.titl = "Sell Service";
 	$scope.ServiceList = "Service List";
 	$scope.formData = {};
@@ -335,6 +335,13 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement){
 	 	$('.datepicker').datepicker('setDate',date);
 	 	// $('.select2').select2()
 	}, 777);
+
+	userManagement.getUserDetailsFromKey($scope.userKey)
+	.then(function(response){
+		var data = response[0];
+		$scope.formData.userFullName = data;
+	});
+	
 	serviceManagement.getService()
 	.then(function(data){
 		$scope.services = data;

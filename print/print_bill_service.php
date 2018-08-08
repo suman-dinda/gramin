@@ -78,9 +78,11 @@
         <div class="col-md-12">
           <div class="box box-primary">
               <?php
+              if(isset($_GET['data'])){
                 $x = base64_decode($_GET['data']);
 
                 $jsonData = json_decode($x,true);
+                $uDetails = $jsonData['userFullName'];
                 //print_r($x);
                 //die();
               ?>
@@ -142,14 +144,18 @@
               <div class="right">
                 <div align="right" class="signature">
                   <p class="center">
-                    <h5><?php //echo $uDetails['u_firstname']." ".$uDetails['u_lastname'];?></h5>
+                    <h5><?php echo $uDetails['u_firstname']." ".$uDetails['u_lastname'];?></h5>
                     <p>
                       <strong>-Sale Authorised By-</strong>
                     </p>
                   </p>
                 </div>
               </div>
-              
+              <?php
+                }else{
+                  die();
+                }
+              ?>
           </div>
         </div>
       </div>

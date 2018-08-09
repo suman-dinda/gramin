@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 06, 2018 at 03:09 AM
+-- Generation Time: Aug 09, 2018 at 07:55 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 INSERT INTO `products` (`id`, `product_code`, `product_name`, `product_unit`, `product_size`, `product_category`, `product_subcategory`, `product_brand`, `product_cost`, `product_dealerprice`, `product_tax`, `product_description`, `status`) VALUES
 (1, 'SKU-1531328997147', 'productName', '9900', '3x4x5', 'Shirts', 'Checked Shirts', 'brand.brand_name', '12000', '11000', '5', 'product description', 1),
-(2, 'SKU-1531329234582', 'productName1', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'brand.brand_name', '1200', '1000', '5', 'product description details', 1),
+(2, 'SKU-1531329234582', 'productName1', '40', '3x4x7', 'Shirts', 'Checked Shirts', 'brand.brand_name', '1200', '1000', '5', 'product description details', 1),
 (3, 'SKU-1531331120512', 'productName3', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'brand.brand_name', '12000', '12000', '5', 'product descriptions 90', 1),
 (4, 'SKU-1531331249225', 'productName3', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'brand.brand_name', '12000', '11000', '5', 'product description', 1);
 
@@ -142,13 +142,14 @@ CREATE TABLE IF NOT EXISTS `requestedstock` (
   `stock_unit` int(10) NOT NULL,
   `status` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `requestedstock`
 --
 
 INSERT INTO `requestedstock` (`id`, `user_unique`, `user_id`, `product_id`, `product_name`, `stock_unit`, `status`) VALUES
+(5, 'hSDAeop', 1, 2, 'productName1', 100, 2),
 (4, 'hSDAeop', 1, 1, 'productName', 100, 2);
 
 -- --------------------------------------------------------
@@ -179,14 +180,16 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `sale_userunique` varchar(10) NOT NULL,
   `sale_paymode` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sales`
 --
 
 INSERT INTO `sales` (`id`, `sale_no`, `sale_chalan`, `sale_date`, `sale_customer`, `sale_custmobile`, `sale_custlocation`, `sale_custaddress`, `sale_pcode`, `sale_pname`, `sale_pcategory`, `sale_pid`, `sale_pquantity`, `sale_pmrp`, `sale_ptax`, `sale_totbill`, `sale_note`, `sale_userunique`, `sale_paymode`) VALUES
-(1, 'SL-4386', 'wertyu', '03/08/2018', 'Suman Dinda', '08050986742', 'Chennai', 'SIruseri', 'SKU-1531328997147', 'productName', 'Shirts', '1', '2', '12000', '5', '25200', 'ok', 'hSDAeop', NULL);
+(1, 'SL-4386', 'wertyu', '03/08/2018', 'Suman Dinda', '08050986742', 'Chennai', 'SIruseri', 'SKU-1531328997147', 'productName', 'Shirts', '1', '2', '12000', '5', '25200', 'ok', 'hSDAeop', NULL),
+(2, 'SL-3627', 'wertyu', '07/08/2018', 'Suman Dinda', '08050986742', 'Chennai', 'SIruseri', 'SKU-1531328997147', 'productName', 'Shirts', '1', '2', '12000', '5', '37800', 'ok', 'hSDAeop', 'Cash'),
+(3, 'SL-3627', 'wertyu', '07/08/2018', 'Suman Dinda', '08050986742', 'Chennai', 'SIruseri', 'SKU-1531329234582', 'productName1', 'Shirts', '2', '10', '1200', '5', '37800', 'ok', 'hSDAeop', 'Cash');
 
 -- --------------------------------------------------------
 
@@ -197,6 +200,7 @@ INSERT INTO `sales` (`id`, `sale_no`, `sale_chalan`, `sale_date`, `sale_customer
 DROP TABLE IF EXISTS `service_request`;
 CREATE TABLE IF NOT EXISTS `service_request` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_no` int(10) DEFAULT NULL,
   `service_name` varchar(20) NOT NULL,
   `service_amount` int(10) NOT NULL,
   `service_date` varchar(15) NOT NULL,
@@ -204,17 +208,22 @@ CREATE TABLE IF NOT EXISTS `service_request` (
   `customer_mobile` varchar(15) NOT NULL,
   `customer_address` text NOT NULL,
   `payment_mode` varchar(20) NOT NULL,
+  `amount_paid` int(10) DEFAULT NULL,
+  `amount_due` int(10) DEFAULT NULL,
   `userkey` varchar(10) DEFAULT NULL,
   `status` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_request`
 --
 
-INSERT INTO `service_request` (`id`, `service_name`, `service_amount`, `service_date`, `customer_name`, `customer_mobile`, `customer_address`, `payment_mode`, `userkey`, `status`) VALUES
-(3, 'Pan Card', 100, '05/08/2018', 'Suman Dinda', '08050986742', 'SIruseri', 'cash', 'hSDAeop', 1);
+INSERT INTO `service_request` (`id`, `service_no`, `service_name`, `service_amount`, `service_date`, `customer_name`, `customer_mobile`, `customer_address`, `payment_mode`, `amount_paid`, `amount_due`, `userkey`, `status`) VALUES
+(4, NULL, 'Pan Card', 100, '07/08/2018', 'Suman Dinda', '08050986742', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 'cash', NULL, NULL, 'hSDAeop', 1),
+(3, NULL, 'Pan Card', 100, '05/08/2018', 'Suman Dinda', '08050986742', 'SIruseri', 'cash', NULL, NULL, 'hSDAeop', 1),
+(5, NULL, 'Pan Card', 100, '07/08/2018', 'Suman Dinda', '08050986742', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 'cash', NULL, NULL, 'hSDAeop', 1),
+(6, NULL, 'Pan Card', 100, '07/08/2018', 'Suman D', '08050986742', 'sipcot it park chennai', 'cash', NULL, NULL, 'hSDAeop', 1);
 
 -- --------------------------------------------------------
 
@@ -255,14 +264,15 @@ CREATE TABLE IF NOT EXISTS `stock_list` (
   `req_id` int(10) NOT NULL,
   `status` int(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stock_list`
 --
 
 INSERT INTO `stock_list` (`id`, `product_id`, `product_name`, `user_unique`, `user_id`, `stock_requested`, `stock_unit`, `req_id`, `status`) VALUES
-(1, 1, 'productName', 'hSDAeop', 1, 100, 98, 4, 1);
+(1, 1, 'productName', 'hSDAeop', 1, 100, 96, 4, 1),
+(2, 2, 'productName1', 'hSDAeop', 1, 100, 50, 5, 1);
 
 -- --------------------------------------------------------
 

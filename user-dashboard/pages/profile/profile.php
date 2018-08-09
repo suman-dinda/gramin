@@ -7,12 +7,12 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#!"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Create Gram Panchayat</li>
+        <li class="active">Your Profile</li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" ng-init="loadProfile()">
         <div class="row">
           <div class="col-md-12">
             <div class="box box-primary">

@@ -69,8 +69,28 @@
                       <div class="row">
                         <div class="col-md-6">
                               <div class="form-group">
+                                  <label for="service_no">ServiceNumber</label>
+                                  <input type="text" ng-model="formData.service_no" id="service_no" class="form-control">
+                              </div>
+                          </div>
+                        <div class="col-md-6">
+                              <div class="form-group">
                                   <label for="customer_add">Customer Address</label>
                                   <textarea ng-model="formData.customer_add" id="customer_add" class="form-control"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="amount_paid">Amount Paid</label>
+                                  <input type="text" ng-model="formData.amount_paid" id="amount_paid" class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="amount_due">Amount Due</label>
+                                  <input type="text" ng-model="formData.amount_due" id="amount_due" class="form-control">
                               </div>
                           </div>
                       </div>

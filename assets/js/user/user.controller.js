@@ -137,7 +137,7 @@ app.controller('dashboardController', function($scope,$http,$location,dataPassin
 	},1000)
 
 	$scope.changePaswd = function(){
-		alert("Working");
+		alert("InProgress");
 	}
 	
 });
@@ -330,6 +330,8 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement,userMa
 	$scope.formData = {};
 	$scope.userKey = $rootScope.key;
 	var date = new Date();
+	var x = Math.floor((Math.random() * 10000) + 1);
+	$scope.formData.service_no = "SR-"+x;
 
 	setTimeout(function(){
 	 	$('.datepicker').datepicker({
@@ -389,6 +391,32 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement,userMa
 });
 
 //profileController
-app.controller("profileController",function($scope){
+app.controller("profileController",function($scope,$rootScope,userManagement){
 	$scope.titl = "Your Profile";
+	$scope.formData = {};
+	$scope.userkey = $rootScope.key;
+
+	$scope.loadProfile = function(){
+		userManagement.getUserDetailsFromKey($scope.userkey)
+		.then(function(data){
+			$scope.response = data[0];
+			$scope.formData.firstname = $scope.response.u_firstname;
+			$scope.formData.lastname = $scope.response.u_lastname;
+			$scope.formData.fathersname = $scope.response.u_firstname;
+			$scope.formData.dob = $scope.response.u_dob;
+			$scope.formData.mobile = $scope.response.u_mobile;
+			$scope.formData.aadhar = $scope.response.u_aadhar;
+			$scope.formData.pan = $scope.response.u_pan;
+			$scope.formData.email = $scope.response.u_email;
+			$scope.formData.district = $scope.response.u_district;
+			$scope.formData.taluk = $scope.response.u_taluk;
+			$scope.formData.address = $scope.response.u_address;
+			$scope.formData.pincode = $scope.response.u_pincode;
+			$scope.formData.account = $scope.response.b_accno;
+			$scope.formData.ifsc = $scope.response.b_ifsc;
+			$scope.formData.accounttype = $scope.response.b_acctype;
+			$scope.formData.bank = $scope.response.b_bank;
+
+		})
+	}
 });

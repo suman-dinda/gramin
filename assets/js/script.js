@@ -1,5 +1,6 @@
 var app = angular.module("gramin", ["ngRoute"]);
 
+
 let logout = () =>{
 	$.ajax({
 	    url: '../api/logout/logout.php',

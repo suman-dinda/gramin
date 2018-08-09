@@ -18,9 +18,13 @@ app.config(function($routeProvider) {
     .when("/service_list", {
         templateUrl : "pages/serviceList.php"
     })
+    .when("/profile", {
+        templateUrl : "pages/profile/profile.php"
+    })
     .when("/sales", {
         templateUrl : "pages/sales/sales_list.php"
     })
+    
     
 
  });

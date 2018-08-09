@@ -135,6 +135,10 @@ app.controller('dashboardController', function($scope,$http,$location,dataPassin
 			$(this).attr('data-target',temp);
 		});
 	},1000)
+
+	$scope.changePaswd = function(){
+		alert("Working");
+	}
 	
 });
 
@@ -382,4 +386,9 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement,userMa
 			$scope.serviceList = data;
 		});
 	}
+});
+
+//profileController
+app.controller("profileController",function($scope){
+	$scope.titl = "Your Profile";
 });

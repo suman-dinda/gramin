@@ -389,8 +389,34 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		})
 	}
 	$scope.updaterequestService = function(){
-		var FormData = dataPassing.getData();
-		console.log(FormData);
+		var _FormData = dataPassing.getData();
+		var GET = btoa(JSON.stringify(_FormData));
+		if(_FormData.status == '2'){
+			if(parseInt(_FormData.prevAmount) + parseInt(_FormData.amount_paid) == _FormData.service_cost ){
+				serviceManagement.updaterequestService(_FormData)
+				.then(function(data){
+					$scope.response = data;
+					if($scope.response==1){
+						window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+						$.notify({
+							message: 'Service Request Sent' 
+						},{
+							type: 'success'
+						});
+						$('#requestService')[0].reset();
+						
+					}else{
+						$.notify({
+							message: 'Service Request Failed' 
+						},{
+							type: 'danger'
+						});
+					}
+				})
+			}
+		}else{
+			window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+		}
 	}
 
 	$scope.getIndividualServiceList = function(){
@@ -409,6 +435,7 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		$scope.srvData.service_no = serviceData.service_no;
 		$scope.srvData.status = serviceData.status;
 		if($scope.srvData.status == '2'){
+			$scope.srvData.prevAmount = serviceData.amount_paid;
 			$scope.srvData.amount_due = 0;
 			$scope.srvData.amount_paid = serviceData.amount_due;
 		}else{

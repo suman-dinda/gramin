@@ -83,7 +83,7 @@
 
                 $jsonData = json_decode($x,true);
                 $uDetails = $jsonData['userFullName'];
-                //print_r($x);
+                print_r($x);
                 //die();
               ?>
               <table align="center" class="table details-section">
@@ -110,7 +110,10 @@
                     </td>
                     <td class="center">
                         <table class="full-width">
-                        
+                        <tr>
+                          <td>Reciept No :&nbsp;</td>
+                          <td class="cust-dashed"><?php echo $jsonData['service_no']; ?></td>
+                        </tr>
                         <tr>
                           <td>Date :&nbsp;</td>
                           <td class="cust-dashed"><?php echo $jsonData['sell_date']; ?></td>
@@ -126,6 +129,7 @@
                     <th>Service Name</th>
                     <th>Payment Mode</th>
                     <th>Service Cost</th>
+                    <th>Amount Due</th>
                     
                   </tr>
                 </thead>
@@ -135,11 +139,12 @@
                         <td><?php echo $jsonData['service_name']; ?></td>
                         <td><?php echo $jsonData['payment_mode']; ?></td>
                         <td><?php echo $jsonData['service_cost']; ?></td>
+                        <td><?php echo $jsonData['amount_due']; ?></td>
                       </tr>
                 </tbody>
               </table>
               <div class="col-md-12 total-amount-section">
-                <h4 align="right">Total Amount : <?php echo $jsonData['service_cost']."/-"; ?></h4>
+                <h4 align="right">Total Amount : <?php echo $jsonData['amount_paid']."/-"; ?></h4>
               </div>
               <div class="right">
                 <div align="right" class="signature">

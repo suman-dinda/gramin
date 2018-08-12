@@ -21,6 +21,9 @@ app.config(function($routeProvider) {
     .when("/profile", {
         templateUrl : "pages/profile/profile.php"
     })
+    .when("/edService", {
+        templateUrl : "pages/sell_UnpaidService.php"
+    })
     .when("/sales", {
         templateUrl : "pages/sales/sales_list.php"
     })

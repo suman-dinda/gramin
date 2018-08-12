@@ -28,8 +28,9 @@
                             <th>Service Date</th>
                             <th>Customer Name</th>
                             <th>Customer Mobile</th>
-                            <th>Customer Address</th>
+                            <th>Amount Paid</th>
                             <th>Pay Mode</th>
+                            <th>Amount Due</th>
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
@@ -40,10 +41,11 @@
                               <td>{{sl.service_date}}</td>
                               <td>{{sl.customer_name}}</td>
                               <td>{{sl.customer_mobile}}</td>
-                              <td>{{sl.customer_address}}</td>
+                              <td>{{sl.amount_paid}}</td>
                               <td>{{sl.payment_mode}}</td>
+                              <td>{{sl.amount_due}}</td>
                               <td>{{sl.status}}</td>
-                              <td><span ng-click="editUser(user.u_id)"><i class="fa fa-fw fa-eye"></i></span></td>
+                              <td><a ng-click="showService(sl)"><i class="fa fa-fw fa-eye"></i></a></td>
                           </tr>
                         </tbody>
                     </table>

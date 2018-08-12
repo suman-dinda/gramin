@@ -324,7 +324,7 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 // 		$scope.printData = "BumbleBee";
 // });
 //sellService
-app.controller("sellService",function($scope,$rootScope,serviceManagement,userManagement){
+app.controller("sellService",function($scope,$rootScope,$location,dataPassing,serviceManagement,userManagement){
 	$scope.titl = "Sell Service";
 	$scope.ServiceList = "Service List";
 	$scope.formData = {};
@@ -332,6 +332,7 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement,userMa
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
 	$scope.formData.service_no = "SR-"+x;
+	 
 
 	setTimeout(function(){
 	 	$('.datepicker').datepicker({
@@ -346,16 +347,22 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement,userMa
 	.then(function(response){
 		var data = response[0];
 		$scope.formData.userFullName = data;
+		$scope.srvData.userFullName = data;
 	});
 	
 	serviceManagement.getService()
 	.then(function(data){
 		$scope.services = data;
 	});
+
+
 	$scope.getServiceAmount = function(data){
 		$scope.formData.service_cost = data.service_price;
 	}
 
+	$scope.getAmountDue = function(){
+		$scope.formData.amount_due = $scope.formData.service_cost - + $scope.formData.amount_paid;
+	}
 	$scope.requestService = function(){
 		$scope.formData.sell_date = document.getElementById('sell_date').value;
 		$scope.formData.service_name = document.getElementById('service').selectedOptions[0].innerHTML;
@@ -381,12 +388,44 @@ app.controller("sellService",function($scope,$rootScope,serviceManagement,userMa
 			}
 		})
 	}
+	$scope.updaterequestService = function(){
+		var FormData = dataPassing.getData();
+		console.log(FormData);
+	}
 
 	$scope.getIndividualServiceList = function(){
 		serviceManagement.getIndividualServiceList($scope.userKey)
 		.then(function(data){
 			$scope.serviceList = data;
 		});
+	}
+	$scope.showService=function(data){
+		dataPassing.setData(data);
+		$location.path("edService");
+	}
+	$scope.getServiceData = function(){
+		$scope.srvData = {};
+		var serviceData = dataPassing.getData();
+		$scope.srvData.service_no = serviceData.service_no;
+		$scope.srvData.status = serviceData.status;
+		if($scope.srvData.status == '2'){
+			$scope.srvData.amount_due = 0;
+			$scope.srvData.amount_paid = serviceData.amount_due;
+		}else{
+			$scope.srvData.amount_due = serviceData.amount_due;
+			$scope.srvData.amount_paid = serviceData.amount_paid;
+		}
+		$scope.srvData.service_cost = serviceData.service_amount;
+		$scope.srvData.customer_add = serviceData.customer_address;
+		$scope.srvData.customer_contact = serviceData.customer_mobile;
+		$scope.srvData.customer_name = serviceData.customer_name;
+		$scope.srvData.service_name = serviceData.service_name;
+		$scope.srvData.payment_mode = serviceData.payment_mode;
+		$scope.srvData.service_name = serviceData.service_name;
+		$scope.srvData.service = serviceData.service_name;
+		$scope.srvData.rid = serviceData.id;
+		
+		dataPassing.setData($scope.srvData);
 	}
 });
 
@@ -397,7 +436,7 @@ app.controller("profileController",function($scope,$rootScope,userManagement){
 	$scope.userkey = $rootScope.key;
 
 	$scope.loadProfile = function(){
-		userManagement.getUserDetailsFromKey($scope.userkey)
+		userManagement.getUserProfileFromKey($scope.userkey,"profile")
 		.then(function(data){
 			$scope.response = data[0];
 			$scope.formData.firstname = $scope.response.u_firstname;

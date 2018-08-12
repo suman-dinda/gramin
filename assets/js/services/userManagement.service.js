@@ -85,5 +85,21 @@ app.service("userManagement",function($http,$log){
             throw response;
 		});
 	}
+	this.getUserProfileFromKey = function(userkey,usecase){
+		var data = {};
+		data.userkey = userkey;
+		data.usecase = usecase;
+		return $http({
+			method : "POST",
+	        url : "../api/getUserFromKey.php",
+	        params: data,
+	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	    }).then(function success(response){
+			return response.data;
+		},function error(response){
+			$log.error('ERROR:', response);
+            throw response;
+		});
+	}
 
 });

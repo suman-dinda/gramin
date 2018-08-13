@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 09, 2018 at 07:55 PM
+-- Generation Time: Aug 13, 2018 at 04:02 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -200,7 +200,7 @@ INSERT INTO `sales` (`id`, `sale_no`, `sale_chalan`, `sale_date`, `sale_customer
 DROP TABLE IF EXISTS `service_request`;
 CREATE TABLE IF NOT EXISTS `service_request` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `service_no` int(10) DEFAULT NULL,
+  `service_no` varchar(10) DEFAULT NULL,
   `service_name` varchar(20) NOT NULL,
   `service_amount` int(10) NOT NULL,
   `service_date` varchar(15) NOT NULL,
@@ -213,17 +213,14 @@ CREATE TABLE IF NOT EXISTS `service_request` (
   `userkey` varchar(10) DEFAULT NULL,
   `status` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_request`
 --
 
 INSERT INTO `service_request` (`id`, `service_no`, `service_name`, `service_amount`, `service_date`, `customer_name`, `customer_mobile`, `customer_address`, `payment_mode`, `amount_paid`, `amount_due`, `userkey`, `status`) VALUES
-(4, NULL, 'Pan Card', 100, '07/08/2018', 'Suman Dinda', '08050986742', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 'cash', NULL, NULL, 'hSDAeop', 1),
-(3, NULL, 'Pan Card', 100, '05/08/2018', 'Suman Dinda', '08050986742', 'SIruseri', 'cash', NULL, NULL, 'hSDAeop', 1),
-(5, NULL, 'Pan Card', 100, '07/08/2018', 'Suman Dinda', '08050986742', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 'cash', NULL, NULL, 'hSDAeop', 1),
-(6, NULL, 'Pan Card', 100, '07/08/2018', 'Suman D', '08050986742', 'sipcot it park chennai', 'cash', NULL, NULL, 'hSDAeop', 1);
+(7, 'SR-6953', 'Pan Card', 100, '11/08/2018', 'Suman Dinda', '08050986742', 'SIruseri', 'cash', 50, 50, 'hSDAeop', 2);
 
 -- --------------------------------------------------------
 

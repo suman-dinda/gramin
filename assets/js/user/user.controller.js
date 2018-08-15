@@ -328,6 +328,7 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 	$scope.titl = "Sell Service";
 	$scope.ServiceList = "Service List";
 	$scope.formData = {};
+	$scope.srvData = {};
 	$scope.userKey = $rootScope.key;
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
@@ -390,7 +391,9 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 	}
 	$scope.updaterequestService = function(){
 		var _FormData = dataPassing.getData();
+		_FormData.sell_date = document.getElementById('sell_date').value;
 		var GET = btoa(JSON.stringify(_FormData));
+
 		if(_FormData.status == '2'){
 			if(parseInt(_FormData.prevAmount) + parseInt(_FormData.amount_paid) == _FormData.service_cost ){
 				serviceManagement.updaterequestService(_FormData)
@@ -403,7 +406,7 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 						},{
 							type: 'success'
 						});
-						$('#requestService')[0].reset();
+						$location.path('service_list');
 						
 					}else{
 						$.notify({
@@ -430,7 +433,7 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		$location.path("edService");
 	}
 	$scope.getServiceData = function(){
-		$scope.srvData = {};
+		
 		var serviceData = dataPassing.getData();
 		$scope.srvData.service_no = serviceData.service_no;
 		$scope.srvData.status = serviceData.status;

@@ -1,10 +1,11 @@
 app.service("productManagement",function($http,$log){
-	this.createProduct = function(data){
+	this.createProduct = function(data,formdata){
 		return $http({
 	        method : "POST",
 	        url : "../api/createProduct.php",
-	        params: data,
-	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	        data: data,
+	        params: formdata,
+	        headers: {'Content-Type': undefined}
 	    }).then(function success(response) {
 	        return response.data;
 	    }, function error(response) {

@@ -337,68 +337,149 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+        <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard"></i> <span>UdyogaSanjeevini</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#!"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-          </ul>
-        </li>
-        
-        <li class="treeview" ng-hide="subown=='false'">
-          <a>
-            <i class="fa fa-dashboard"></i> <span>View Subordinates</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="#!view/subordinates"><i class="fa fa-circle-o"></i> Your Subordinates</a></li>
+            <li class=""><a href="#!"><i class="fa fa-circle-o text-aqua"></i> Dashboard</a></li>
+            <li class="treeview" ng-hide="subown=='false'"> <a href="#!"><i class="fa fa-circle-o text-yellow"></i> SubOrdinates</a>
+                <ul class="treeview-menu">
+                  <li class="active"><a href="#!view/subordinates"><i class="fa fa-circle-o"></i> Your Subordinates</a></li>
+                </ul>
+            </li>
+            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-yellow"></i> Services</a>
+                <ul class="treeview-menu">
+                  <li class="active"><a href="#!sell_service"><i class="fa fa-circle-o"></i> Sell Service</a></li>
+                  <li class="active"><a href="#!service_list"><i class="fa fa-circle-o"></i> Service List</a></li>
+                </ul>
+            </li>
+            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-red"></i> Sales</a>
+                <ul class="treeview-menu">
+                  <li class="active"><a href="#!sales"><i class="fa fa-circle-o"></i> Sales List</a></li>
+                  <li class="active"><a href="#!add_sales"><i class="fa fa-circle-o"></i> Add Sales</a></li>
+                </ul>
+            </li>
+            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-yellow"></i> Request Product</a>
+                <ul class="treeview-menu">
+                  <li class="active"><a href="#!requestProduct"><i class="fa fa-circle-o"></i> Request Purchase</a></li>
+                </ul>
+            </li>
           </ul>
         </li>
         <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>Services</span>
+            <i class="fa fa-dashboard"></i> <span>E-Shiksha</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#!sell_service"><i class="fa fa-circle-o"></i> Sell Service</a></li>
-            <li class="active"><a href="#!service_list"><i class="fa fa-circle-o"></i> Service List</a></li>
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Shiksha</a></li>
+          </ul>
+        </li>
+         <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>E-Commerce</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Commerce</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>Sales</span>
+            <i class="fa fa-dashboard"></i> <span>E-Governance</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#!sales"><i class="fa fa-circle-o"></i> Sales List</a></li>
-            <li class="active"><a href="#!add_sales"><i class="fa fa-circle-o"></i> Add Sales</a></li>
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Governance</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>Request Product</span>
+            <i class="fa fa-dashboard"></i> <span>E-Banking</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="#!requestProduct"><i class="fa fa-circle-o"></i> Request Purchase</a></li>
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Banking</a></li>
           </ul>
         </li>
-        <li class="header">LABELS</li>
-        <li><a><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Skill Development</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Skill Development</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Utility BillPayments</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Utility BillPayments</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Solar Products</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Solar Products</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Product Promotion</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Product Promotion</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Insurance</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Insurance</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>Financial Services</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Financial Services</a></li>
+          </ul>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="box box-primary">
-              <form id="addProduct" ng-submit="addProduct()">
+              <form id="addProduct" ng-submit="addProduct()" enctype="multipart/form-data">
                 <div class="box-header with-border">
                     <h3 class="box-title">New Product</h3>
                   </div>
@@ -41,19 +41,19 @@
                           </div>
                           <div class="form-group">
                             <label for="prd_category">Select Category</label>
-                            <select class="form-control select2" ng-model="formData.prd_category" name="prd_category" id="prd_category" ng-change="getSubCategory(formData.prd_category)">
+                            <select class="form-control" ng-model="formData.prd_category" name="prd_category" id="prd_category" ng-change="getSubCategory(formData.prd_category)">
                                 <option ng-repeat="category in categories" value="{{category.id}}">{{category.category_name}}</option>
                             </select>
                           </div>
                           <div class="form-group">
                             <label for="prd_subcategory">Select SubCategory</label>
-                            <select class="form-control select2" ng-model="formData.prd_subcategory" name="prd_subcategory" id="prd_subcategory">
+                            <select class="form-control" ng-model="formData.prd_subcategory" name="prd_subcategory" id="prd_subcategory">
                                <option ng-repeat="subcategory in subCategories" value="{{subcategory.subcategory_name}}">{{subcategory.subcategory_name}}</option>
                             </select>
                           </div>
                           <div class="form-group">
                             <label for="prd_brand">Select Brand</label>
-                            <select class="form-control select2" ng-model="formData.prd_brand" name="prd_brand" id="prd_brand">
+                            <select class="form-control" ng-model="formData.prd_brand" name="prd_brand" id="prd_brand">
                                 <option ng-repeat="brand in brands" value="brand.brand_name">{{brand.brand_name}}</option>
                             </select>
                           </div>
@@ -69,7 +69,7 @@
                           </div>
                           <div class="form-group">
                             <label for="prd_tax">Product Tax</label>
-                            <select class="form-control select2" type="text" ng-model="formData.prd_tax" name="prd_tax" id="prd_tax">
+                            <select class="form-control" type="text" ng-model="formData.prd_tax" name="prd_tax" id="prd_tax">
                               <option>5%</option>
                               <option>12%</option>
                               <option>18%</option>
@@ -79,9 +79,13 @@
                             <label for="prd_description">Product Description</label>
                             <textarea class="form-control" ng-model="formData.prd_description" name="prd_description" id="prd_description"></textarea>
                           </div>
+                          <div class="form-group">
+                            <label for="product_images">Select Product Images</label>
+                            <input type='file' class="form-control" multiple ng-file="uploadfiles" accept="images/*">
+                          </div>
                         </div>
                       </div>
-                      {{formData}}
+                     
                   </div>
                   <div class="box-footer">
                     <div class="form-group">

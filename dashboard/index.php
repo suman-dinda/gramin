@@ -731,6 +731,7 @@ if(isset($_SESSION['username'])){
 <script src="../assets/js/services/categoryManagement.service.js"></script>
 <script src="../assets/js/services/dataPassing.service.js"></script>
 <script src="../assets/js/services/stockManagement.service.js"></script>
+<script src="../assets/js/services/compare-to.directive.js"></script>
 <script src="../assets/js/controller.js"></script>
 </body>
 </html>

@@ -263,6 +263,7 @@ app.controller("productController",function($scope,$interval,categoryManagement,
 	$scope.addProductTitle = "Add Product";
 	var date = new Date().getTime();
 	$scope.formData={};
+	var formdata = new FormData();
 	$scope.formData.prd_code = "SKU-"+date;
 
 	categoryManagement.getAllCategory()
@@ -290,10 +291,19 @@ app.controller("productController",function($scope,$interval,categoryManagement,
 	 	});
 	 },777);
 
+	 /* $scope.getTheFiles = function ($files) {
+	        angular.forEach($files, function (value, key) {
+	            formdata.append(key, value);
+	        });
+	    }*/
 	 $scope.addProduct = function(){
+	 	var fd = new FormData();
 	 	$scope.formData.prd_category = $('#prd_category')[0].selectedOptions[0].innerHTML;
-	 	console.log($scope.formData);
-	 	productManagement.createProduct($scope.formData)
+	 	
+        angular.forEach($scope.uploadfiles,function(file){
+            fd.append('file[]',file);
+        });
+	 	productManagement.createProduct(fd,$scope.formData)
 	 	.then(function(data){
 	 		if(data==1){
 				$.notify({

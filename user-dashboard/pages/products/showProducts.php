@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{showProducts}}
+        {{showProductsTitle}}
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
@@ -20,7 +20,27 @@
             </div>
             <div class="box-body">
               <div class="row">
-                <div class="col-md-3" ng-repeat></div>
+                <div class="col-md-3" ng-repeat="prd in productStock">
+                  <div class="card">
+                    <img class="img-responsive product_img" src="../upload/{{prd.product_images.split(',')[0]}}">
+                    <section class="center">
+                      <h4><strong>{{prd.product_name}}</strong></h4>
+                      <p>
+                        <em>{{prd.product_code}}</em>
+                      </p>
+                      <p>
+                        {{prd.product_category}} - {{prd.product_subcategory}}
+                      </p>
+                      <div class="row">
+                        <div class="col-md-6">MRP : {{prd.product_cost}}</div>
+                        <div class="col-md-6">Tax : {{prd.product_tax}}</div>
+                      </div>
+                    </section>
+                    <section class="center">
+                      <h5>Current Stock: {{prd.id | stockFilter}}</h5>
+                    </section>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

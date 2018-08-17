@@ -351,21 +351,22 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
                   <li class="active"><a href="#!view/subordinates"><i class="fa fa-circle-o"></i> Your Subordinates</a></li>
                 </ul>
             </li>
-            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-yellow"></i> Services</a>
+            <li class="treeview" ng-hide="subown=='true'"><a href="#!"><i class="fa fa-circle-o text-yellow"></i> Services</a>
                 <ul class="treeview-menu">
                   <li class="active"><a href="#!sell_service"><i class="fa fa-circle-o"></i> Sell Service</a></li>
                   <li class="active"><a href="#!service_list"><i class="fa fa-circle-o"></i> Service List</a></li>
                 </ul>
             </li>
-            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-red"></i> Sales</a>
+            <li class="treeview" ng-hide="subown=='true'"><a href="#!"><i class="fa fa-circle-o text-red"></i> Sales</a>
                 <ul class="treeview-menu">
                   <li class="active"><a href="#!sales"><i class="fa fa-circle-o"></i> Sales List</a></li>
                   <li class="active"><a href="#!add_sales"><i class="fa fa-circle-o"></i> Add Sales</a></li>
                 </ul>
             </li>
-            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-yellow"></i> Request Product</a>
+            <li class="treeview"><a href="#!"><i class="fa fa-circle-o text-yellow"></i>Products</a>
                 <ul class="treeview-menu">
                   <li class="active"><a href="#!requestProduct"><i class="fa fa-circle-o"></i> Request Purchase</a></li>
+                  <li class="active"><a href="#!showProducts"><i class="fa fa-circle-o"></i> Show Products</a></li>
                 </ul>
             </li>
           </ul>

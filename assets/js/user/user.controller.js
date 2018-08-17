@@ -164,6 +164,7 @@ app.controller("viewSubordinates", function($scope,$rootScope,$location,dataPass
 
 app.controller('requestProduct', function($scope,productManagement,stockManagement,dataPassing){
 	$scope.title = "Request Product";
+	$scope.showProducts = "Your Products";
 	$scope.formData = {};
 	productManagement.getAllProduct()
 	 .then(function(data){
@@ -174,6 +175,13 @@ app.controller('requestProduct', function($scope,productManagement,stockManageme
 	 		width:'100%'
 	 	});
 	 },777);
+
+	 $scope.showProducts = function(){
+	 	productManagement.getProductStock($scope.userKey)
+		.then(function(response){
+			$scope.products = response;
+		});
+	 }
 	 $scope.requestProduct = function(){
 	 	$scope.formData.prd_name = $('#product_name')[0].selectedOptions[0].innerHTML;
 	 	$scope.formData.prd_id = $('#product_name').val();

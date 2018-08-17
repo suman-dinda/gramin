@@ -24,6 +24,9 @@ app.config(function($routeProvider) {
     .when("/edService", {
         templateUrl : "pages/sell_UnpaidService.php"
     })
+    .when("/showProducts", {
+        templateUrl : "pages/products/showProducts.php"
+    })
     .when("/sales", {
         templateUrl : "pages/sales/sales_list.php"
     })

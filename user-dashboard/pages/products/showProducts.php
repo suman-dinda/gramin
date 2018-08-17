@@ -22,7 +22,7 @@
               <div class="row">
                 <div class="col-md-3" ng-repeat="prd in productStock">
                   <div class="card">
-                    <img class="img-responsive product_img" src="../upload/{{prd.product_images.split(',')[0]}}">
+                    <img class="img-responsive product_img" src="../upload/{{prd.product_images.split(',')[0]}}" onerror="this.src='../assets/img/product_dummy.png'">
                     <section class="center">
                       <h4><strong>{{prd.product_name}}</strong></h4>
                       <p>

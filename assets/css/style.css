@@ -1,0 +1,11 @@
+.product_img{
+	width: 50%;
+    margin: 0px auto;
+}
+.card {
+    box-shadow: #ccc 0px 1px 3px 0px;
+    padding: 5%;
+}
+.center{
+	text-align: center;
+}

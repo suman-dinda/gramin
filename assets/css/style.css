@@ -9,3 +9,10 @@
 .center{
 	text-align: center;
 }
+section.footer-buttons {
+    border-top: 1px solid #ccc;
+    padding-top: 3%;
+}
+.product-grid{
+	margin-top: 2%;
+}

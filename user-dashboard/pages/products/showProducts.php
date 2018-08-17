@@ -20,15 +20,15 @@
             </div>
             <div class="box-body">
               <div class="row">
-                <div class="col-md-3" ng-repeat="prd in productStock">
+                <div class="col-md-3 product-grid" ng-repeat="prd in productStock">
                   <div class="card">
                     <img class="img-responsive product_img" src="../upload/{{prd.product_images.split(',')[0]}}" onerror="this.src='../assets/img/product_dummy.png'">
                     <section class="center">
                       <h4><strong>{{prd.product_name}}</strong></h4>
                       <p>
                         <em>{{prd.product_code}}</em>
-                      </p>
                       <p>
+                      </p>
                         {{prd.product_category}} - {{prd.product_subcategory}}
                       </p>
                       <div class="row">
@@ -39,11 +39,10 @@
                     <section class="center">
                       <h5>Current Stock: {{prd.id | stockFilter}}</h5>
                     </section>
-                    <section class="footer-buttons">
+                    <section class="footer-buttons center">
                         <div class="row">
-                          <div class="col-md-4"><button type="button" ng-click="requestProduct(prd.id,prd.product_name)" class="btn btn-warning"><i class="fa fa-mouse-pointer fa-fw"></i></button></div>
-                          <div class="col-md-4"><button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart fa-fw"></i></button></div>
-                          <div class="col-md-4"><button type="button" class="btn btn-danger"><i class="fa fa-eye fa-fw"></i></button></div>
+                          <div class="col-md-6 col-xs-6"><button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart fa-fw"></i></button></div>
+                          <div class="col-md-6 col-xs-6"><button type="button" ng-click="viewProduct(prd)" class="btn btn-danger"><i class="fa fa-eye fa-fw"></i></button></div>
                         </div>
                     </section>
                   </div>
@@ -55,3 +54,25 @@
       </div>
     </section>
   </main>
+
+    <!-- View Product Modal -->
+  <div class="modal fade" id="viewProductModal" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Product Details</h4>
+          </div>
+          <div class="modal-body">
+            {{prd_obj}}
+            <h3>{{test}}</h3>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>

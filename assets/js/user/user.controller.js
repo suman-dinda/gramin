@@ -7,7 +7,7 @@ app.filter('stockFilter',function(dataPassing){
 		var stockArray = dataPassing.getData();
 		var stockUnit ='';
 		angular.forEach(stockArray, function(key,value){
-			console.log(key.product_id);
+			
 			if(x == key.product_id){
 				stockUnit = key.stock_unit;
 			}
@@ -179,7 +179,9 @@ app.controller("viewSubordinates", function($scope,$rootScope,$location,dataPass
 app.controller('requestProduct', function($scope,$rootScope,productManagement,stockManagement,dataPassing){
 	$scope.title = "Request Product";
 	$scope.showProductsTitle = "Your Products";
+	$scope.prd_obj = "Loading...";
 	$scope.formData = {};
+	$scope.af={};
 	$scope.userKey = $rootScope.key;
 	productManagement.getAllProduct()
 	 .then(function(data){
@@ -200,15 +202,22 @@ app.controller('requestProduct', function($scope,$rootScope,productManagement,st
 			dataPassing.setData($scope.userStocks);
 		});
 	 }
-	 $scope.requestProduct = function(product_id,product_name){
-	 	if(product_id===undefined && product_name===undefined){
-	 		$scope.formData.prd_name = $('#product_name')[0].selectedOptions[0].innerHTML;
-	 		$scope.formData.prd_id = $('#product_name').val();
-	 	}else{
-	 		$scope.formData.prd_name = product_name;
-	 		$scope.formData.prd_id = product_id;
-	 	}
+
+	 $scope.viewProduct = function(prod_uct){
+	 	//$scope.prd_obj = product;
+	 	$('#viewProductModal').modal('show');
+	 	$('#viewProductModal').on('shown.bs.modal', function() {
+	 		$scope.$evalAsync(function($scope){
+	        	$scope.prd_obj = "tffhfghfhgfghfhfhfhgf";
+	        	$scope.test = "tffhfghfhgfghfhfhfhgf";
+	        }); 
+	 	});
+	 }
+
+	 $scope.requestProduct = function(){
 	 	
+ 		$scope.formData.prd_name = $('#product_name')[0].selectedOptions[0].innerHTML;
+ 		$scope.formData.prd_id = $('#product_name').val();
 	 	$scope.formData.user_unique = dataPassing.getCookie('userkey');
 	 	$scope.formData.userid = dataPassing.getCookie('user_id');
 

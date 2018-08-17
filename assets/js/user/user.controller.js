@@ -2,6 +2,20 @@ app.run(function($rootScope,dataPassing){
 	$rootScope.key = dataPassing.getCookie('userkey');
 
 });
+app.filter('stockFilter',function(dataPassing){
+	return function(x){
+		var stockArray = dataPassing.getData();
+		var stockUnit ='';
+		angular.forEach(stockArray, function(key,value){
+			console.log(key.product_id);
+			if(x == key.product_id){
+				stockUnit = key.stock_unit;
+			}
+		});
+		//console.log("Stocks Array",stockArray);
+		return stockUnit;
+	}
+})
 app.controller('dashboardController', function($scope,$http,$location,dataPassing){
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
@@ -162,10 +176,11 @@ app.controller("viewSubordinates", function($scope,$rootScope,$location,dataPass
 
 });
 
-app.controller('requestProduct', function($scope,productManagement,stockManagement,dataPassing){
+app.controller('requestProduct', function($scope,$rootScope,productManagement,stockManagement,dataPassing){
 	$scope.title = "Request Product";
-	$scope.showProducts = "Your Products";
+	$scope.showProductsTitle = "Your Products";
 	$scope.formData = {};
+	$scope.userKey = $rootScope.key;
 	productManagement.getAllProduct()
 	 .then(function(data){
 	 	$scope.products = data;
@@ -177,9 +192,12 @@ app.controller('requestProduct', function($scope,productManagement,stockManageme
 	 },777);
 
 	 $scope.showProducts = function(){
+
 	 	productManagement.getProductStock($scope.userKey)
 		.then(function(response){
-			$scope.products = response;
+			$scope.productStock = response.products;
+			$scope.userStocks = response.stocks;
+			dataPassing.setData($scope.userStocks);
 		});
 	 }
 	 $scope.requestProduct = function(){

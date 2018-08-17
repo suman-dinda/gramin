@@ -200,9 +200,15 @@ app.controller('requestProduct', function($scope,$rootScope,productManagement,st
 			dataPassing.setData($scope.userStocks);
 		});
 	 }
-	 $scope.requestProduct = function(){
-	 	$scope.formData.prd_name = $('#product_name')[0].selectedOptions[0].innerHTML;
-	 	$scope.formData.prd_id = $('#product_name').val();
+	 $scope.requestProduct = function(product_id,product_name){
+	 	if(product_id===undefined && product_name===undefined){
+	 		$scope.formData.prd_name = $('#product_name')[0].selectedOptions[0].innerHTML;
+	 		$scope.formData.prd_id = $('#product_name').val();
+	 	}else{
+	 		$scope.formData.prd_name = product_name;
+	 		$scope.formData.prd_id = product_id;
+	 	}
+	 	
 	 	$scope.formData.user_unique = dataPassing.getCookie('userkey');
 	 	$scope.formData.userid = dataPassing.getCookie('user_id');
 

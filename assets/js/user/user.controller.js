@@ -208,8 +208,13 @@ app.controller('requestProduct', function($scope,$rootScope,productManagement,st
 	 	$('#viewProductModal').modal('show');
 	 	$('#viewProductModal').on('shown.bs.modal', function() {
 	 		$scope.$evalAsync(function($scope){
-	        	$scope.prd_obj = "tffhfghfhgfghfhfhfhgf";
-	        	$scope.test = "tffhfghfhgfghfhfhfhgf";
+	        	document.getElementById('product_name').innerHTML = prod_uct.product_name;
+	        	document.getElementById('brand').innerHTML = prod_uct.product_brand;
+	        	document.getElementById('category').innerHTML = prod_uct.product_category + ", "+ prod_uct.product_subcategory;
+	        	document.getElementById('cost').innerHTML = prod_uct.product_cost;
+	        	document.getElementById('size').innerHTML = prod_uct.product_size;
+	        	document.getElementById('tax').innerHTML = prod_uct.product_tax+"%";
+	        	document.getElementById('description').innerHTML = prod_uct.product_description;
 	        }); 
 	 	});
 	 }

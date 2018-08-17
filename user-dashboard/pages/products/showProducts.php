@@ -23,6 +23,7 @@
                 <div class="col-md-3 product-grid" ng-repeat="prd in productStock">
                   <div class="card">
                     <img class="img-responsive product_img" src="../upload/{{prd.product_images.split(',')[0]}}" onerror="this.src='../assets/img/product_dummy.png'">
+
                     <section class="center">
                       <h4><strong>{{prd.product_name}}</strong></h4>
                       <p>
@@ -67,8 +68,42 @@
             <h4 class="modal-title">Product Details</h4>
           </div>
           <div class="modal-body">
-            {{prd_obj}}
-            <h3>{{test}}</h3>
+            <h4 class="center" id='product_name'>Product Name</h4>
+            <section>
+              <div class="row">
+                <div class="col-md-6 col-xs-6">
+                  <div class="form-group">
+                    <label>Brand :</label>
+                    <p id='brand'></p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                  <div class="form-group">
+                    <label>Category & SubCategory :</label>
+                    <p id='category'></p>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                  <strong>Cost :</strong><span id='cost'></span>
+                </div>
+                <div class="col-md-6 col-xs-6">
+                  <div class="row">
+                    <div class="col-md-6 col-xs-6">
+                      <strong>Size :</strong><span id='size'></span>
+                    </div>
+                    <div class="col-md-6 col-xs-6"><strong>Tax :</strong><span id='tax'></span></div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <strong>Product Description</strong><br>
+                  <span id="description"></span>
+                </div>
+              </div>
+
+            </section>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

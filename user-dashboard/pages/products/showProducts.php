@@ -39,6 +39,13 @@
                     <section class="center">
                       <h5>Current Stock: {{prd.id | stockFilter}}</h5>
                     </section>
+                    <section class="footer-buttons">
+                        <div class="row">
+                          <div class="col-md-4"><button type="button" ng-click="requestProduct(prd.id,prd.product_name)" class="btn btn-warning"><i class="fa fa-mouse-pointer fa-fw"></i></button></div>
+                          <div class="col-md-4"><button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart fa-fw"></i></button></div>
+                          <div class="col-md-4"><button type="button" class="btn btn-danger"><i class="fa fa-eye fa-fw"></i></button></div>
+                        </div>
+                    </section>
                   </div>
                 </div>
               </div>

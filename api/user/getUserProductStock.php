@@ -3,7 +3,7 @@ include_once '../../server/connection.php';
 $conn = new Connection();
 $jsonData = array();
 $products = array();
-$data=array();
+$data= new \stdClass();
 
 if (isset($_REQUEST['userkey'])){
 	$key = $_REQUEST['userkey'];
@@ -18,8 +18,8 @@ if (isset($_REQUEST['userkey'])){
 				$jsonData[] = $res;
 			}
 
-	$stocks = array("stocks"=>$jsonData);
-	array_push($data, $stocks);
+	$stocks = $jsonData;
+	$data -> stocks = $stocks;
 	}else{
 		print("No Data Found");
 	}
@@ -31,8 +31,8 @@ if (isset($_REQUEST['userkey'])){
 				$products[] = $res;
 			}
 	
-	$prd = array("products"=>$products);
-	array_push($data, $prd);
+	$prd = $products;
+	$data -> products = $prd;
 	}else{
 		print("No Data Found");
 	}

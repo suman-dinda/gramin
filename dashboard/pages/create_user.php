@@ -64,13 +64,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label for="mobile">Mobile Number</label>
-                              <input type="text" ng-model="formData.mobile" class="form-control" id="mobile" placeholder="Enter Mobile Number" maxlength="12" required>
+                              <input type="text" ng-model="formData.mobile" class="form-control" id="mobile" placeholder="Enter Mobile Number" maxlength="12" onkeypress="return isNumber(event)" required="required">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                               <label for="aadhar">Aadhar Number</label>
-                              <input type="text" ng-model="formData.aadhar" class="form-control" id="aadhar" placeholder="Enter Aadhar Number" maxlength="12" required>
+                              <input type="text" ng-model="formData.aadhar" class="form-control" id="aadhar" placeholder="Enter Aadhar Number" maxlength="12" onkeypress="return isNumber(event)" required="required" required>
                             </div>
                         </div>
                       </div>

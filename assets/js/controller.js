@@ -348,7 +348,7 @@ app.controller("categoryController",function($scope,$routeParams,$interval,categ
 	}else if($location.path() == "/editCategory"){
 		$scope.routeData = JSON.parse(sessionStorage.getItem("dataPassing"));
 	}else{
-		$location.path("/category");
+		//$location.path("/category");
 	}
 	
 
@@ -444,7 +444,7 @@ app.controller("subcategoryController",function($scope,$interval,$location,$rout
 	}else if($location.path() == "/editSubCategory"){
 		$scope.routeData = JSON.parse(sessionStorage.getItem("dataPassing"));
 	}else{
-		$location.path("/subcategory");
+		//$location.path("/subcategory");
 	}
 
 	categoryManagement.getSingle($scope.routeData)
@@ -554,7 +554,7 @@ app.controller("brandController",function($scope,$interval,$location,$routeParam
 	}else if($location.path() == "/editBrand"){
 		$scope.routeData = JSON.parse(sessionStorage.getItem("dataPassing"));
 	}else{
-		$location.path("/brands");
+		//$location.path("/brands");
 	}
 
 	categoryManagement.getSingle($scope.routeData)

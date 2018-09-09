@@ -54,7 +54,7 @@
                           <div class="form-group">
                             <label for="prd_brand">Select Brand</label>
                             <select class="form-control" ng-model="formData.prd_brand" name="prd_brand" id="prd_brand">
-                                <option ng-repeat="brand in brands" value="brand.brand_name">{{brand.brand_name}}</option>
+                                <option ng-repeat="brand in brands" value="{{brand.brand_name}}">{{brand.brand_name}}</option>
                             </select>
                           </div>
                         </div>
@@ -70,9 +70,10 @@
                           <div class="form-group">
                             <label for="prd_tax">Product Tax</label>
                             <select class="form-control" type="text" ng-model="formData.prd_tax" name="prd_tax" id="prd_tax">
-                              <option>5%</option>
-                              <option>12%</option>
-                              <option>18%</option>
+                              <option value="0">0%</option>
+                              <option value="5">5%</option>
+                              <option value="12">12%</option>
+                              <option value="18">18%</option>
                             </select>
                           </div>
                           <div class="form-group">

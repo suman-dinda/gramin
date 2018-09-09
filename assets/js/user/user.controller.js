@@ -535,3 +535,33 @@ app.controller("profileController",function($scope,$rootScope,userManagement){
 		})
 	}
 });
+
+app.controller("showSingleProduct",function($scope,$rootScope,productManagement,$routeParams){
+	$scope.showProductsTitle = $routeParams.showprod + " Products";
+	$scope.showSingleCategoryProducts = function(){
+		if($routeParams.showprod == "Solar"){
+
+			productManagement.getSingleCategoryProject($routeParams.showprod)
+			.then(function(response){
+				$scope.sigleCatData = response;
+				
+			});
+		}
+	}
+
+	 $scope.viewProduct = function(prod_uct){
+	 	//$scope.prd_obj = product;
+	 	$('#viewProductModal').modal('show');
+	 	$('#viewProductModal').on('shown.bs.modal', function() {
+	 		$scope.$evalAsync(function($scope){
+	        	document.getElementById('product_name').innerHTML = prod_uct.product_name;
+	        	document.getElementById('brand').innerHTML = prod_uct.product_brand;
+	        	document.getElementById('category').innerHTML = prod_uct.product_category + ", "+ prod_uct.product_subcategory;
+	        	document.getElementById('cost').innerHTML = prod_uct.product_cost;
+	        	document.getElementById('size').innerHTML = prod_uct.product_size;
+	        	document.getElementById('tax').innerHTML = prod_uct.product_tax+"%";
+	        	document.getElementById('description').innerHTML = prod_uct.product_description;
+	        }); 
+	 	});
+	 }
+});

@@ -33,7 +33,7 @@
                       </div>
                       <div class="form-group">
                         <label for="category">Category</label>
-                            <select class="form-control select2" ng-model="formData.category" name="category" id="category">
+                            <select class="form-control" ng-model="formData.category" name="category" id="category">
                                 <option ng-repeat="category in categories" value="{{category.id}}">{{category.category_name}}</option>
                             </select>
                       </div>

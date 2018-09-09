@@ -448,7 +448,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Solar Products</a></li>
+            <li class=""><a href="#!showProducts/Solar"><i class="fa fa-circle-o"></i> Solar Products</a></li>
           </ul>
         </li>
         <li class="treeview">

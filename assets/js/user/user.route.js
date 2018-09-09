@@ -30,7 +30,9 @@ app.config(function($routeProvider) {
     .when("/sales", {
         templateUrl : "pages/sales/sales_list.php"
     })
-    
+    .when("/showProducts/:showprod", {
+        templateUrl : "pages/products/showSingleProduct.php"
+    })
     
 
  });

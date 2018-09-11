@@ -108,13 +108,12 @@
                         </span>
                     <input type="checkbox" value="">
                     <span class="text">{{tasks.taskName}}</span>
-                    <small class="label label-info"><i class="fa fa-clock-o"></i></small>
+                    <small class="label label-info"><i class="fa fa-clock-o"></i>{{tasks.taskId}}</small>
                     <div class="tools">
                       <i class="fa fa-edit"></i>
                       <i class="fa fa-trash-o"></i>
                     </div>
                   </li>
-                  {{taskList}}
                 </ul>
               </div>
               <!-- /.box-body -->

@@ -2,8 +2,9 @@ app.controller('homeController',function($scope,$route,userManagement){
 	$scope.title = "Dashboard";
 	$scope.zone_count = 0;$scope.district_count= 0;$scope.taluk_count = 0;
 	$scope.grampanchayat_count = 0;
-
 	$scope.taskList = [];
+		
+	
 	$scope.add_task = "";
 	userManagement.getUserCount("zone_head")
 	.then(function(data){
@@ -152,8 +153,9 @@ app.controller('homeController',function($scope,$route,userManagement){
 	$scope.addTask = function(task){
 		var obj ={};
 		obj.taskName = task;
-		obj.taskId = Math.random();
+		obj.taskId = Math.floor((Math.random() * 99999) + 1);
 		$scope.taskList.push(obj);
+		//localStorage.setItem("tasklist",$scope.taskList);
 	}
 
 

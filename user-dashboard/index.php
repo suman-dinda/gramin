@@ -16,7 +16,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Gramin| UserDashboard</title>
+  <title>GKMS | UserDashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -67,9 +67,9 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>U</b>S</span>
+      <span class="logo-mini"><b>GK</b>MS</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Udyog</b>Sanjeevini</span>
+      <span class="logo-lg"><b>G K </b>M S</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -232,13 +232,13 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
         </li>
         <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>E-Shiksha</span>
+            <i class="fa fa-dashboard"></i> <span>E-Sikshana</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Shiksha</a></li>
+            <li class=""><a href="#!showProducts/E-Sikshana"><i class="fa fa-circle-o"></i> E-Sikshana</a></li>
           </ul>
         </li>
          <li class="treeview">

@@ -539,7 +539,7 @@ app.controller("profileController",function($scope,$rootScope,userManagement){
 app.controller("showSingleProduct",function($scope,$rootScope,productManagement,$routeParams){
 	$scope.showProductsTitle = $routeParams.showprod + " Products";
 	$scope.showSingleCategoryProducts = function(){
-		if($routeParams.showprod == "Solar"){
+		if($routeParams.showprod == "Solar" || $routeParams.showprod == "E-Sikshana"){
 
 			productManagement.getSingleCategoryProject($routeParams.showprod)
 			.then(function(response){

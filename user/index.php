@@ -38,7 +38,7 @@
 <body class="hold-transition login-page user-login">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index2.html"><b>Gramoddhara Kendra</b><br>Management System</a>
+    <a href="#"><b>Gramoddhara Kendra</b><br>Management System</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

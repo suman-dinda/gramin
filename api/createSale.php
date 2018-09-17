@@ -12,6 +12,7 @@ $sale_no = $_REQUEST['sale_no'];
 $sale_product = $_REQUEST['sale_product'];
 $sale_totalBill = $_REQUEST['totalBill'];
 $user_key = $_COOKIE['userkey'];
+$user_id = $_COOKIE['user_id'];
 $payMode = $_REQUEST['sale_payment'];
 $result ="";
 $updateResponse="";
@@ -36,4 +37,6 @@ for($i=0;$i<count($cart);$i++){
 
 }
 print_r($result."-".$updateResponse);
+
+
 ?>

@@ -38,9 +38,13 @@ if(isset($_FILES)){
 	$prdDealerPrice = $_REQUEST['prd_delear_price'];
 	$prdTax = $_REQUEST['prd_tax'];
 	$prdDescription = $_REQUEST['prd_description'];
+	$gp_comission=$_REQUEST['gp_comission'];
+	$taluk_commission = $_REQUEST['taluk_commission'];
+	$dist_commission = $_REQUEST['dist_commission'];
+	$zone_commission = $_REQUEST['zone_commission'];
 	$status = 1;
 
-	$sql = "INSERT INTO `products` (`product_code`,`product_name`,`product_unit`,`product_size`,`product_category`,`product_subcategory`,`product_brand`,`product_cost`,`product_dealerprice`,`product_tax`,`product_description`,`product_images`,`status`) VALUES('$prdCode','$prdName','$prdUnit','$prdSize','$prdCategory','$prdSubCategory','$prdBrand','$prdCost','$prdDealerPrice','$prdTax','$prdDescription','$imageList','$status')";
+	$sql = "INSERT INTO `products` (`product_code`,`product_name`,`product_unit`,`product_size`,`product_category`,`product_subcategory`,`product_brand`,`product_cost`,`product_dealerprice`,`product_tax`,`product_description`,`product_images`,`gp_comission`,`taluk_commission`,`dist_commission`,`zone_commission`,`status`) VALUES('$prdCode','$prdName','$prdUnit','$prdSize','$prdCategory','$prdSubCategory','$prdBrand','$prdCost','$prdDealerPrice','$prdTax','$prdDescription','$imageList','$gp_comission','$taluk_commission','$dist_commission','$zone_commission','$status')";
 	$result = $conn->execute($sql);
 	print($result);
 }

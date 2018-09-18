@@ -30,6 +30,18 @@ app.directive('ngFile', ['$parse', function ($parse) {
            }
         };
   }]);
+
+app.directive('imageSlider', function(){
+  return{
+    scope:{
+      images: '@'
+    },
+    link: function(scope, element, attributes) {
+         console.log(scope.images);
+        
+      }
+  }
+});
 /*app.directive('ngFiles', ['$parse', function ($parse) {
 
             function fn_link(scope, element, attrs) {

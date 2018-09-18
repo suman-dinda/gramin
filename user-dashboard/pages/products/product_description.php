@@ -2,7 +2,7 @@
   <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        {{Title}}
+        
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
@@ -16,17 +16,26 @@
         <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title"></h3>
+                <h3 class="box-title">{{Title}}</h3>
             </div>
             <div class="box-body">
               <div class="row">
                   <div class="col-md-6">
-                    
+                    <div class="row">
+                      
+                    </div>
+                    <div class="row">
+                      <image-slider images="{{prd_obj.product_images}}"></image-slider>
+                    </div>
                   </div>
                   <div class="col-md-6">
                       <h3>{{prd_obj.product_name}}</h3>
-                      <h4>{{prd_obj.product_cost | currency}}</h4>
+                      <h4 class="price-tag">{{prd_obj.product_cost | currency}}</h4>
                       <table class="table">
+                        <tr>
+                          <th>Product Code</th>
+                          <td>{{prd_obj.product_code}}</td>
+                        </tr>
                         <tr>
                           <th>Brand</th>
                           <td>{{prd_obj.product_brand}}</td>
@@ -35,8 +44,23 @@
                           <th>Category</th>
                           <td>{{prd_obj.product_category}}</td>
                         </tr>
+                        <tr>
+                          <th>SubCategory</th>
+                          <td>{{prd_obj.product_subcategory}}</td>
+                        </tr>
+                        <tr>
+                          <th>Size</th>
+                          <td>{{prd_obj.product_size}}</td>
+                        </tr>
+                        <tr>
+                          <th>Description</th>
+                          <td>{{prd_obj.product_description}}</td>
+                        </tr>
                       </table>
                   </div>
+              </div>
+              <div class="box-footer">
+                <button class="float-right add-cart-btn" type="button">Add To Cart</button>
               </div>
             </div>
           </div>

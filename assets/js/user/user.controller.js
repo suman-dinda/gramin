@@ -203,21 +203,7 @@ app.controller('requestProduct', function($scope,$rootScope,productManagement,st
 		});
 	 }
 
-	 $scope.viewProduct = function(prod_uct){
-	 	//$scope.prd_obj = product;
-	 	$('#viewProductModal').modal('show');
-	 	$('#viewProductModal').on('shown.bs.modal', function() {
-	 		$scope.$evalAsync(function($scope){
-	        	document.getElementById('product_name').innerHTML = prod_uct.product_name;
-	        	document.getElementById('brand').innerHTML = prod_uct.product_brand;
-	        	document.getElementById('category').innerHTML = prod_uct.product_category + ", "+ prod_uct.product_subcategory;
-	        	document.getElementById('cost').innerHTML = prod_uct.product_cost;
-	        	document.getElementById('size').innerHTML = prod_uct.product_size;
-	        	document.getElementById('tax').innerHTML = prod_uct.product_tax+"%";
-	        	document.getElementById('description').innerHTML = prod_uct.product_description;
-	        }); 
-	 	});
-	 }
+	 
 
 	 $scope.requestProduct = function(){
 	 	
@@ -564,4 +550,17 @@ app.controller("showSingleProduct",function($scope,$rootScope,productManagement,
 	        }); 
 	 	});
 	 }
+});
+
+app.controller("productDetails",function($scope,$rootScope,productManagement,$routeParams){
+	$scope.productId = $routeParams.id;
+	$scope.Title = "Product Details";
+
+	$scope.productDescription = function(){
+		productManagement.getSingleProduct($scope.productId)
+		.then(function(response){
+			$scope.prd_obj = response[0];
+			console.log($scope.prd_obj); 
+		})
+	}
 });

@@ -33,6 +33,9 @@ app.config(function($routeProvider) {
     .when("/showProducts/:showprod", {
         templateUrl : "pages/products/showSingleProduct.php"
     })
+    .when("/product_details/:id", {
+        templateUrl : "pages/products/product_description.php"
+    })
     
 
  });

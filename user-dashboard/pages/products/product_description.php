@@ -25,7 +25,10 @@
                       
                     </div>
                     <div class="row">
-                      <image-slider images="{{prd_obj.product_images}}"></image-slider>
+                      
+                        <div ng-repeat="images in _images track by $index" class="col-md-4">
+                            <img src="{{servername}}upload/{{images}}" class="img-responsive" alt="{{images}}">
+                        </div>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -60,7 +63,7 @@
                   </div>
               </div>
               <div class="box-footer">
-                <button class="float-right add-cart-btn" type="button">Add To Cart</button>
+                <button class="float-right add-cart-btn" type="button" ng-click = "addToCart(prd_obj)">Add To Cart</button>
               </div>
             </div>
           </div>

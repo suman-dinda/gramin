@@ -1,1 +1,1 @@
-var app = angular.module("graminUser", ["ngRoute"]);
+var app = angular.module("graminUser", ["ngRoute","ngCookies"]);

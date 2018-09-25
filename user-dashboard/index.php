@@ -117,19 +117,23 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
             <a class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-flag-o"></i>
+              <i class="fa fa-shopping-cart"></i>
               <span class="label label-danger">0</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 0 tasks</li>
+              <li class="header" ng-show="cart.length === 0">You have 0 items</li>
               <li>
                 <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  
+                <ul class="menu" ng-show="cart.length !== 0">
+
+                <li class="list-group-item" ng-repeat="c in cart">
+                  <h4>{{c.product_name}} |<span style="color:blue"> {{c.count}} </span>| {{c.product_cost*c.count | currency}}</h4>
+                  <input class="btn btn-danger" type="button" ng-click="removeItemCart(c)" value="Remove" />
+                </li>
                 </ul>
               </li>
               <li class="footer">
-                <a>View all tasks</a>
+                <a>Total : {{total | currency}}</a>
               </li>
             </ul>
           </li>
@@ -479,6 +483,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
 
 <!-- Angular -->
 <script src="../bower_components/angular/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.min.js" data-require="angularjs@1.4" data-semver="1.4.4"></script>
 <!-- Angular Route-->
 <script src="../bower_components/angular/angular-route.js"></script>
 <!-- Angular oclazyload-->

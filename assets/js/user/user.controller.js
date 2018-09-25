@@ -1,6 +1,60 @@
-app.run(function($rootScope,dataPassing){
+app.run(function($rootScope,dataPassing,$cookies){
 	$rootScope.key = dataPassing.getCookie('userkey');
+	$rootScope.cart = [];
+	$rootScope.total = 0;
+	/// $rootScope.products = productsData;
+	$rootScope.addtoCart = function(product){
 
+		// $rootrootScope.cartItems.push(product);
+		// console.log($rootrootScope.cartItems);
+		if ($rootScope.cart.length === 0){
+	 		product.count = 1;
+	 		$rootScope.cart.push(product);
+	 	} else {
+	 		var repeat = false;
+	 		for(var i = 0; i< $rootScope.cart.length; i++){
+	 			if($rootScope.cart[i].id === product.id){
+	 				repeat = true;
+	 				$rootScope.cart[i].count +=1;
+	 			}
+	 		}
+	 		if (!repeat) {
+	 			product.count = 1;
+	 		 	$rootScope.cart.push(product);	
+	 		}
+	 	}
+	 	var expireDate = new Date();
+  		expireDate.setDate(expireDate.getDate() + 1);
+	 	$cookies.putObject('cart', $rootScope.cart,  {'expires': expireDate});
+	 	$rootScope.cart = $cookies.getObject('cart');
+		 
+		$rootScope.total += parseFloat(product.product_cost);
+      	$cookies.put('total', $rootScope.total,  {'expires': expireDate});
+	}
+
+	$rootScope.removeItemCart = function(product){
+		   
+		   if(product.count > 1){
+		     product.count -= 1;
+		     var expireDate = new Date();
+         expireDate.setDate(expireDate.getDate() + 1);
+		     $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
+ 			   $rootScope.cart = $cookies.getObject('cart');
+		   }
+		   else if(product.count === 1){
+		     var index = $rootScope.cart.indexOf(product);
+ 			 $rootScope.cart.splice(index, 1);
+ 			 expireDate = new Date();
+       expireDate.setDate(expireDate.getDate() + 1);
+ 			 $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
+ 			 $rootScope.cart = $cookies.getObject('cart');
+		     
+		   }
+		   
+		   $rootScope.total -= parseFloat(product.product_cost);
+       $cookies.put('total', $rootScope.total,  {'expires': expireDate});
+		   
+		 };
 });
 app.filter('stockFilter',function(dataPassing){
 	return function(x){
@@ -16,10 +70,12 @@ app.filter('stockFilter',function(dataPassing){
 		return stockUnit;
 	}
 })
-app.controller('dashboardController', function($scope,$http,$location,dataPassing){
+app.controller('dashboardController', function($scope,$http,$location,dataPassing,$rootScope,$cookies){
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
 	$scope.subown = 'true';
+	$scope.cart = $cookies.getObject('cart');
+	$scope.cartCount = $scope.cart.length;
 	if($scope.userType == "gram_panchayat"){
 		$scope.subown = 'false';
 	}
@@ -555,12 +611,21 @@ app.controller("showSingleProduct",function($scope,$rootScope,productManagement,
 app.controller("productDetails",function($scope,$rootScope,productManagement,$routeParams){
 	$scope.productId = $routeParams.id;
 	$scope.Title = "Product Details";
+	if(window.location.hostname == "localhost"){
+		$scope.servername = window.location.protocol+"//"+window.location.hostname+"/gramin/";
+	}else{
+		$scope.servername = window.location.protocol+"//"+window.location.hostname+"/";
+	}
 
 	$scope.productDescription = function(){
 		productManagement.getSingleProduct($scope.productId)
 		.then(function(response){
 			$scope.prd_obj = response[0];
+			$scope._images = $scope.prd_obj.product_images.split(',');
 			console.log($scope.prd_obj); 
 		})
+	}
+	$scope.addToCart = function(product){
+		$rootScope.addtoCart(product);
 	}
 });

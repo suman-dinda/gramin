@@ -1,12 +1,20 @@
 app.run(function($rootScope,dataPassing,$cookies){
 	$rootScope.key = dataPassing.getCookie('userkey');
-	$rootScope.cart = [];
-	$rootScope.total = 0;
+	if(localStorage.getItem('cart') == null){
+		$rootScope.cart = [];
+		$rootScope.total = 0;
+	}else{
+		$rootScope.cart = JSON.parse(localStorage.getItem('cart'));
+		$rootScope.total = JSON.parse(localStorage.getItem('total'));
+	}
+	
+	
 	/// $rootScope.products = productsData;
 	$rootScope.addtoCart = function(product){
 
 		// $rootrootScope.cartItems.push(product);
 		// console.log($rootrootScope.cartItems);
+
 		if ($rootScope.cart.length === 0){
 	 		product.count = 1;
 	 		$rootScope.cart.push(product);
@@ -25,34 +33,48 @@ app.run(function($rootScope,dataPassing,$cookies){
 	 	}
 	 	var expireDate = new Date();
   		expireDate.setDate(expireDate.getDate() + 1);
-	 	$cookies.putObject('cart', $rootScope.cart,  {'expires': expireDate});
-	 	$rootScope.cart = $cookies.getObject('cart');
+  		window.localStorage.setItem('cart', JSON.stringify($rootScope.cart));
+	 	$rootScope.cart = JSON.parse(localStorage.getItem('cart'));
 		 
 		$rootScope.total += parseFloat(product.product_cost);
-      	$cookies.put('total', $rootScope.total,  {'expires': expireDate});
+		localStorage.setItem('total',JSON.stringify($rootScope.total));
+      	//$cookies.put('total', $rootScope.total,  {'expires': expireDate});
+      	$rootScope.$watch($rootScope.cart, function() {
+	    console.log("**** reference checkers $watch ****")
+	  });
+      	//$rootScope.digest();
+
+	  	$.notify({
+			message: product.product_name + ' is added to cart' 
+		},{
+			type: 'success'
+		});
 	}
 
 	$rootScope.removeItemCart = function(product){
 		   
 		   if(product.count > 1){
-		     product.count -= 1;
-		     var expireDate = new Date();
-         expireDate.setDate(expireDate.getDate() + 1);
-		     $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
- 			   $rootScope.cart = $cookies.getObject('cart');
+		    product.count -= 1;
+		    var expireDate = new Date();
+         	expireDate.setDate(expireDate.getDate() + 1);
+         	localStorage.setItem('cart', $rootScope.cart);
+		    //$cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
+ 			$rootScope.cart = localStorage.getItem('cart');
 		   }
 		   else if(product.count === 1){
-		     var index = $rootScope.cart.indexOf(product);
- 			 $rootScope.cart.splice(index, 1);
- 			 expireDate = new Date();
-       expireDate.setDate(expireDate.getDate() + 1);
- 			 $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
+		    var index = $rootScope.cart.indexOf(product);
+ 			$rootScope.cart.splice(index, 1);
+ 			expireDate = new Date();
+       		expireDate.setDate(expireDate.getDate() + 1);
+ 			localStorage.setItem('cart', $rootScope.cart); 
+ 			// $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
  			 $rootScope.cart = $cookies.getObject('cart');
 		     
 		   }
 		   
 		   $rootScope.total -= parseFloat(product.product_cost);
-       $cookies.put('total', $rootScope.total,  {'expires': expireDate});
+       	//$cookies.put('total', $rootScope.total,  {'expires': expireDate});
+       	localStorage.setItem('total',JSON.stringify($rootScope.total));
 		   
 		 };
 });
@@ -74,8 +96,13 @@ app.controller('dashboardController', function($scope,$http,$location,dataPassin
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
 	$scope.subown = 'true';
-	$scope.cart = $cookies.getObject('cart');
-	$scope.cartCount = $scope.cart.length;
+	$rootScope.total = JSON.parse(window.localStorage.getItem('total'));
+	$scope.cart = JSON.parse(window.localStorage.getItem('cart'));
+
+	if($scope.cart !== null){
+		$scope.cartCount = $scope.cart.length;
+	}
+	
 	if($scope.userType == "gram_panchayat"){
 		$scope.subown = 'false';
 	}
@@ -290,6 +317,10 @@ app.controller('requestProduct', function($scope,$rootScope,productManagement,st
 
 
 	 }
+
+	 $scope.addToCart = function(product){
+		$rootScope.addtoCart(product);
+	}
 });
 app.controller("salesController", function($scope,$rootScope,$filter,dataPassing,productManagement,saleManagement,userManagement){
 	$scope.addSaleTitle = "Add Sales";
@@ -627,5 +658,51 @@ app.controller("productDetails",function($scope,$rootScope,productManagement,$ro
 	}
 	$scope.addToCart = function(product){
 		$rootScope.addtoCart(product);
+	}
+});
+
+app.controller("checkOut",function($scope,$rootScope){
+	$scope.checkoutTitle = "CheckOut Products";
+	$scope.formData = {};
+	$scope.cart = JSON.parse(window.localStorage.getItem('cart'));
+	$scope.total = JSON.parse(window.localStorage.getItem('total'));
+	//console.log($scope.cartItems);
+	var date = new Date();
+	var x = Math.floor((Math.random() * 10000) + 1);
+	$scope.formData.sale_no = "SL-"+x;
+
+	setTimeout(function(){
+	 	$('.datepicker').datepicker({
+	 		autoclose: true,
+	 		format: 'dd/mm/yyyy'
+	 	});
+	 	$('.datepicker').datepicker('setDate',date);
+	 	// $('.select2').select2()
+	}, 777);
+
+	$scope.addSale = function(){
+		$scope.formData.sale_date = $('#sale_date').val();
+		
+		$scope.formData.cart = JSON.stringify($scope.cart);
+		$scope.formData.totalBill = $scope.total;
+		//localStorage.setItem("printSale", $scope.formData);
+		
+		saleManagement.createSale($scope.formData)
+		.then(function(response){
+			$scope.response = response;
+			if($scope.response == "1-1"){
+				var GET = btoa(JSON.stringify($scope.formData));
+				$('#add_sale_form')[0].reset();
+				window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+			}else{
+				$.notify({
+					message: 'Error in adding sale' 
+				},{
+					type: 'danger'
+				});
+				$('#add_sale_form')[0].reset();
+			}
+		});
+		
 	}
 });

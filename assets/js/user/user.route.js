@@ -36,6 +36,9 @@ app.config(function($routeProvider) {
     .when("/product_details/:id", {
         templateUrl : "pages/products/product_description.php"
     })
+    .when("/checkOut", {
+        templateUrl : "pages/checkOut.php"
+    })
     
 
  });

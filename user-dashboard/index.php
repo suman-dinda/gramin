@@ -65,7 +65,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>GK</b>MS</span>
       <!-- logo for regular state and mobile devices -->
@@ -133,8 +133,14 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
                 </ul>
               </li>
               <li class="footer">
-                <a>Total : {{total | currency}}</a>
+                <div class="col-md-6">
+                   <a ng-href="#!checkOut">Checkout <i class="fa fa-fw fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="col-md-6">
+                  <a>Total : {{total | currency}}</a>
+                </div>
               </li>
+
             </ul>
           </li>
           <!-- User Account: style can be found in dropdown.less -->

@@ -3,7 +3,8 @@ include_once '../../server/connection.php';
 $conn = new Connection();
 $jsonData = array();
 
-$getServiceList = "SELECT * FROM `service_types`";
+$serviceName = $_REQUEST['service_name'];
+$getServiceList = "SELECT * FROM `service_types` WHERE `service_name` = '$serviceName'";
 $result = $conn -> getAll($getServiceList);
 $nbrUsers = count($result);
 if($nbrUsers >0){

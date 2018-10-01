@@ -26,10 +26,11 @@
                       <div class="row">
                           <div class="col-md-6">
                               <div class="form-group">
-                                  <label for="service">Select Service</label>
-                                  <select ng-model="formData.service" id="service" class="form-control select2" data-ng-options="srv as srv.service_name for srv in services" ng-change="getServiceAmount(formData.service)">
+                                  <label for="service">Service Name</label>
+                                  <input type="text" name="service" id="service" ng-model="formData.service" class="form-control" readonly>
+                                 <!--  <select ng-model="formData.service" id="service" class="form-control select2" data-ng-options="srv as srv.service_name for srv in services" ng-change="getServiceAmount(formData.service)">
                                       <option value="" selected>Select Service</option>
-                                  </select>
+                                  </select> -->
                               </div>
                           </div>
                           <div class="col-md-6">
@@ -43,7 +44,7 @@
                           <div class="col-md-6">
                               <div class="form-group">
                                   <label for="service_cost">Service Cost</label>
-                                  <input type="text" ng-model="formData.service_cost" id="service_cost" class="form-control">
+                                  <input type="text" ng-model="formData.service_cost" id="service_cost" class="form-control" readonly>
                               </div>
                           </div>
                           <div class="col-md-6">
@@ -71,7 +72,7 @@
                         <div class="col-md-6">
                               <div class="form-group">
                                   <label for="service_no">ServiceNumber</label>
-                                  <input type="text" ng-model="formData.service_no" id="service_no" class=" form-control form-control-static">
+                                  <input type="text" ng-model="formData.service_no" id="service_no" class=" form-control form-control-static" readonly>
                               </div>
                           </div>
                         <div class="col-md-6">
@@ -110,4 +111,95 @@
         </div>
       </div>
     </section>
+
+    <!-- modal -->
+    <!-- Modal -->
+<div id="serviceModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-title">
+          <div class="col-md-6">
+            GKMS
+          </div>
+          <div class="col-md-6">
+            <p class="pull-right">Date: {{serviceFormObject.sell_date}}</p>&nbsp;
+            <p class="pull-right">Reciept: {{serviceFormObject.service_no}}</p>&nbsp;
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+
+        <p>
+          <table class="table">
+            <tr>
+              <th>
+                Service Name: 
+              </th>
+              <td>
+                {{formData.service}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Name: 
+              </th>
+              <td>
+                {{formData.customer_name}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Mobile Number: 
+              </th>
+              <td>
+                {{formData.customer_contact}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Address: 
+              </th>
+              <td>
+                {{formData.customer_add}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Payment Mode: 
+              </th>
+              <td>
+                {{formData.payment_mode}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Amount Paid
+              </th>
+              <td>
+                {{formData.amount_paid}}
+              </td>
+            </tr>
+            <tr>
+              <th>
+                Amount Due: 
+              </th>
+              <td>
+                {{formData.amount_due}}
+              </td>
+            </tr>
+          </table>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="submitServiceSale()" data-dismiss="modal">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
   </main>

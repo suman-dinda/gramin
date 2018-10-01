@@ -12,7 +12,9 @@ app.service("serviceManagement",function($http,$log){
             throw response;
 	    });
 	}
-	 this.getService = function(data){
+	 this.getService = function(serviceName){
+	 	var data = {};
+	 	data.service_name = serviceName;
 	 	return $http({
 	        method : "POST",
 	        url : "../api/user/getService.php",

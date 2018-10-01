@@ -208,7 +208,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
           <a>
-            <i class="fa fa-dashboard"></i> <span>UdyogaSanjeevini</span>
+            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -238,6 +238,17 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
                   <li class="active"><a href="#!showProducts"><i class="fa fa-circle-o"></i> Show Products</a></li>
                 </ul>
             </li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a>
+            <i class="fa fa-dashboard"></i> <span>UdyogaSanjeevini</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class=""><a href="#!sell_service/UdyogaSanjeevini"><i class="fa fa-circle-o"></i> Udyoga Sanjeevini Service</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -384,15 +395,17 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
           <li>
               <!-- <i class="menu-icon fa fa-birthday-cake bg-red"></i> -->
               <div class="" style="padding: 3%">
-                <form role="form" id="changePasswordForm" name="changePasswordForm" ng-submit="changePaswd()">
+                <form role="form" id="changePasswordForm" name="changePasswordForm" ng-submit="changePwd()">
                     <div class="form-group">
-                      <label for="newPaswd">New Password</label>
-                      <input type="text" name="newPaswd" class="form-control" ng-model="newPaswd" required>
+                      <label for="newpassword">New Password</label>
+                      <input type="password" name="newpassword" id="newpassword" class="form-control" ng-model="formData.newpassword" required>
+                      <!-- {{formData.newpassword}} -->
                     </div>
                     <div class="form-group">
                       <label for="confPaswd">Confirm Password</label>
-                      <input type="text" name="confPaswd" compare-to="newPaswd" class="form-control" ng-model="confPaswd" required>
-                      <small ng-show="changePasswordForm.confPaswd.$error">Password didnot match</small>
+                      <input type="password" name="repassword" id="repassword" compare-to="formData.newpassword" class="form-control" ng-model="formData.repassword" required>
+                      <!-- <small ng-show="changePasswordForm.repassword.$error">Password didnot match</small> -->
+                      <!-- {{formData.repassword}} -->
                     </div>
                     <div class="form-group">
                       <button type="submit" class="btn btn-warning">Update Password</button>

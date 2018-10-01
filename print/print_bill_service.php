@@ -83,7 +83,7 @@
 
                 $jsonData = json_decode($x,true);
                 $uDetails = $jsonData['userFullName'];
-                print_r($x);
+                //print_r($x);
                 //die();
               ?>
               <table align="center" class="table details-section">
@@ -164,6 +164,7 @@
           </div>
         </div>
       </div>
+      <button type="button" onclick="printWindow()">Print</button>
     </section>
 </main>
 <!-- Angular -->
@@ -175,5 +176,12 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
+<script type="text/javascript">
+  function printWindow(){
+    window.print();
+    var win = window.open("http://gp.udyogasanjeevini.com", '_blank');
+    win.focus();
+  }
+</script>
 </body>
 </html>

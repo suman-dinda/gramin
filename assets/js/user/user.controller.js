@@ -443,12 +443,15 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 // 		$scope.printData = "BumbleBee";
 // });
 //sellService
-app.controller("sellService",function($scope,$rootScope,$location,dataPassing,serviceManagement,userManagement){
+app.controller("sellService",function($scope,$rootScope,$location,dataPassing,serviceManagement,userManagement,$routeParams){
 	$scope.titl = "Sell Service";
 	$scope.ServiceList = "Service List";
+	$scope.service = $routeParams.serviceName;
 	$scope.formData = {};
 	$scope.srvData = {};
 	$scope.userKey = $rootScope.key;
+	$scope.formData.service  = "Service Name";
+	$scope.formData.service_cost = "0.00";
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
 	$scope.formData.service_no = "SR-"+x;
@@ -470,22 +473,32 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		$scope.srvData.userFullName = data;
 	});
 	
-	serviceManagement.getService()
+	serviceManagement.getService($scope.service)
 	.then(function(data){
-		$scope.services = data;
+		var obj = data[0];
+		$scope.formData.service = obj.service_name;
+		$scope.formData.service_cost = obj.service_price;
 	});
 
 
-	$scope.getServiceAmount = function(data){
-		$scope.formData.service_cost = data.service_price;
-	}
+	
 
 	$scope.getAmountDue = function(){
 		$scope.formData.amount_due = $scope.formData.service_cost - + $scope.formData.amount_paid;
 	}
+
+
+
 	$scope.requestService = function(){
 		$scope.formData.sell_date = document.getElementById('sell_date').value;
-		$scope.formData.service_name = document.getElementById('service').selectedOptions[0].innerHTML;
+		$scope.formData.service_name = $scope.formData.service;
+		$('#serviceModal').modal('show');
+		$('#serviceModal').on('shown.bs.modal', function (e) {
+		  	$scope.serviceFormObject = $scope.formData;
+		})
+	}
+
+	$scope.submitServiceSale = function(){
 		serviceManagement.requestService($scope.formData)
 		.then(function(data){
 			$scope.response = data;

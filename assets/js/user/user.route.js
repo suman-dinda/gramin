@@ -42,6 +42,9 @@ app.config(function($routeProvider) {
     .when("/checkOut", {
         templateUrl : "pages/checkOut.php"
     })
+    .when("/comingSoon", {
+        templateUrl : "pages/comingSoon.php"
+    })
     
 
  });

@@ -259,7 +259,8 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!showProducts/E-Sikshana"><i class="fa fa-circle-o"></i> E-Sikshana</a></li>
+            <li class=""><a href="#!showProducts/E-Sikshana"><i class="fa fa-circle-o"></i> E-Sikshana Products</a></li>
+            <li class=""><a href="#!sell_service/eSikshana"><i class="fa fa-circle-o"></i> E-Sikshana Service</a></li>
           </ul>
         </li>
          <li class="treeview">
@@ -270,7 +271,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Commerce</a></li>
+            <li class=""><a href="#!comingSoon"><i class="fa fa-circle-o"></i> E-Commerce</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -281,7 +282,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Governance</a></li>
+            <li class=""><a href="#!sell_service/eGovernance"><i class="fa fa-circle-o"></i> E-Governance Service</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -292,7 +293,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> E-Banking</a></li>
+            <li class=""><a href="#!comingSoon"><i class="fa fa-circle-o"></i> E-Banking</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -303,7 +304,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Skill Development</a></li>
+            <li class=""><a href="#!comingSoon"><i class="fa fa-circle-o"></i> Skill Development</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -314,7 +315,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Utility BillPayments</a></li>
+            <li class=""><a href="#!comingSoon"><i class="fa fa-circle-o"></i> Utility BillPayments</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -336,7 +337,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Product Promotion</a></li>
+            <li class=""><a href="#!comingSoon"><i class="fa fa-circle-o"></i> Product Promotion</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -347,7 +348,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Insurance</a></li>
+            <li class=""><a href="#!comingSoon"><i class="fa fa-circle-o"></i> Insurance</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -358,7 +359,8 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!"><i class="fa fa-circle-o"></i> Financial Services</a></li>
+            <li class=""><a href="#!sell_service/PAN"><i class="fa fa-circle-o"></i> PAN Service</a></li>
+            <li class=""><a href="#!sell_service/GST"><i class="fa fa-circle-o"></i> GST Service</a></li>
           </ul>
         </li>
       </ul>

@@ -719,3 +719,6 @@ app.controller("checkOut",function($scope,$rootScope){
 		
 	}
 });
+app.controller("comingSoon",function($scope,$rootScope){
+	$scope.titl = "Service is Coming Soon";
+});

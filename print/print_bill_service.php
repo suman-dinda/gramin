@@ -1,3 +1,6 @@
+<?php
+   session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,6 +60,9 @@
           background-color: #ccc !important;
           -webkit-print-color-adjust: exact;
         }
+        button{
+          display: none !important; 
+        }
     }
     /*@page { size: auto;  margin: 5mm; padding: 2mm; }*/
   </style>
@@ -66,7 +72,7 @@
   <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 align="center">
-          UdyogaSanjeevini
+          GKMS
       </h1>
       <h3  align="center">Sales Bill</h3>
       
@@ -78,11 +84,15 @@
         <div class="col-md-12">
           <div class="box box-primary">
               <?php
+             
               if(isset($_GET['data'])){
                 $x = base64_decode($_GET['data']);
 
                 $jsonData = json_decode($x,true);
                 $uDetails = $jsonData['userFullName'];
+                $serviceName = $jsonData['service_name'];
+                $_SESSION['serviceName'] = $serviceName;
+
                 //print_r($x);
                 //die();
               ?>
@@ -164,7 +174,7 @@
           </div>
         </div>
       </div>
-      <button type="button" onclick="printWindow()">Print</button>
+      <button type="button" style="position: absolute;bottom: 0px;left: 50%;" onclick="printWindow()">Print</button>
     </section>
 </main>
 <!-- Angular -->
@@ -179,8 +189,11 @@
 <script type="text/javascript">
   function printWindow(){
     window.print();
-    var win = window.open("http://gp.udyogasanjeevini.com", '_blank');
-    win.focus();
+    var serviceName = "<?php echo $_SESSION['serviceName'];?>"
+    if(serviceName == "UdyogaSanjeevini"){
+      var win = window.open("http://gp.udyogasanjeevini.com", '_blank');
+      win.focus();
+    }
   }
 </script>
 </body>

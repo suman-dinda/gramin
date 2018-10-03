@@ -1,6 +1,6 @@
 # Project Gramin
 
-Project Features:
+## Project Features:
 
 -Single Page Architecture
 -user tree management (user chain [currently upto lvl 4 chain])
@@ -14,7 +14,7 @@ Project Features:
 -user dashboard to view stocks, sales and products he own
 -comission structure (Coming Soon)
 
-Requirements
+## Requirements
 
 -Angular JS v1.6x and above
 -PHP v5.6

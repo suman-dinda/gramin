@@ -421,7 +421,12 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 			if($scope.response == "1-1"){
 				var GET = btoa(JSON.stringify($scope.formData));
 				$('#add_sale_form')[0].reset();
-				window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				if(window.location.hostname == "localhost"){
+					window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				}else{
+					window.open('http://gkms.in/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				}
+				
 			}else{
 				$.notify({
 					message: 'Error in adding sale' 
@@ -452,6 +457,7 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 	$scope.userKey = $rootScope.key;
 	$scope.formData.service  = "Service Name";
 	$scope.formData.service_cost = "0.00";
+	$scope.inputVisible = true;
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
 	$scope.formData.service_no = "SR-"+x;
@@ -472,15 +478,27 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		$scope.formData.userFullName = data;
 		$scope.srvData.userFullName = data;
 	});
+	if($scope.service == "eSikshana" || $scope.service == "eGovernance"){
+		$scope.inputVisible = false;
+	}else{
+		$scope.inputVisible = true;
+		serviceManagement.getService($scope.service)
+		.then(function(data){
+			var obj = data[0];
+			$scope.formData.service = obj.service_name;
+			$scope.formData.service_cost = obj.service_price;
+		});
+	}
 	
-	serviceManagement.getService($scope.service)
-	.then(function(data){
-		var obj = data[0];
-		$scope.formData.service = obj.service_name;
-		$scope.formData.service_cost = obj.service_price;
-	});
 
-
+	$scope.getServiceTypes = function(serviceName){
+		serviceManagement.getService(serviceName)
+		.then(function(data){
+			var obj = data[0];
+			$scope.formData.service = obj.service_name;
+			$scope.formData.service_cost = obj.service_price;
+		});
+	}
 	
 
 	$scope.getAmountDue = function(){
@@ -504,7 +522,12 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 			$scope.response = data;
 			if($scope.response==1){
 				var GET = btoa(JSON.stringify($scope.formData));
-				window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+				if(window.location.hostname == "localhost"){
+					window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+				}else{
+					window.open('http://gkms.in/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+				}
+				
 				$.notify({
 					message: 'Service Request Sent' 
 				},{
@@ -532,7 +555,12 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 				.then(function(data){
 					$scope.response = data;
 					if($scope.response==1){
-						window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+						if(window.location.hostname == "localhost"){
+							window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+						}else{
+							window.open('http://gkms.in/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+						}
+						//window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
 						$.notify({
 							message: 'Service Request Sent' 
 						},{
@@ -550,7 +578,12 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 				})
 			}
 		}else{
-			window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+			// window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+			if(window.location.hostname == "localhost"){
+				window.open('http://localhost/gramin/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+			}else{
+				window.open('http://gkms.in/print/print_bill_service.php?data='+GET, 'Print-Service', 'width=500,height=400'); 
+			}
 		}
 	}
 
@@ -706,7 +739,12 @@ app.controller("checkOut",function($scope,$rootScope){
 			if($scope.response == "1-1"){
 				var GET = btoa(JSON.stringify($scope.formData));
 				$('#add_sale_form')[0].reset();
-				window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				//window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				if(window.location.hostname == "localhost"){
+					window.open('http://localhost/gramin/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				}else{
+					window.open('http://gkms.in/print/print_bill_user.php?data='+GET, 'Print-Bill', 'width=500,height=400'); 
+				}
 			}else{
 				$.notify({
 					message: 'Error in adding sale' 

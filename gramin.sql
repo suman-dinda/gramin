@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 09, 2018 at 09:13 PM
+-- Generation Time: Oct 03, 2018 at 07:30 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -43,6 +43,10 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_tax` varchar(10) NOT NULL,
   `product_description` text NOT NULL,
   `product_images` text,
+  `gp_commission` int(10) DEFAULT NULL,
+  `taluk_commission` int(10) DEFAULT NULL,
+  `dist_commission` int(10) DEFAULT NULL,
+  `zone_commission` int(10) DEFAULT NULL,
   `status` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
@@ -51,14 +55,14 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_code`, `product_name`, `product_unit`, `product_size`, `product_category`, `product_subcategory`, `product_brand`, `product_cost`, `product_dealerprice`, `product_tax`, `product_description`, `product_images`, `status`) VALUES
-(1, 'SKU-1531328997147', 'productName', '9900', '3x4x5', 'Shirts', 'Checked Shirts', 'Gucci', '12000', '11000', '5', 'product description', '1534440015.jpg,1534440015.png,1534440015.jpg', 1),
-(2, 'SKU-1531329234582', 'productName1', '40', '3x4x7', 'Shirts', 'Checked Shirts', 'Gucci', '1200', '1000', '5', 'product description details', '1534440015.jpg,1534440015.png,1534440015.jpg', 1),
-(3, 'SKU-1531331120512', 'productName3', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'Gucci', '12000', '12000', '5', 'product descriptions 90', '1534440015.jpg,1534440015.png,1534440015.jpg', 1),
-(4, 'SKU-1531331249225', 'productName3', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'Gucci', '12000', '11000', '5', 'product description', '1534440015.jpg,1534440015.png,1534440015.jpg', 1),
-(5, 'SKU-1534439714661', 'SareGaMa Tees', '100', '3x4x5', 'T-Shirts', 'Round Tees', 'Gucci', '299', '249', '5', 'round tees', '1534440015.jpg,1534440015.png,1534440015.jpg', 1),
-(6, 'SKU-1536513007879', 'GL LED Lantern', '1000', '28M', 'Solar', 'Solar Product', 'Gee Lite', '840', '840', '5', 'Power output 1.5 Watt. Powered by 28Pcs 3014 SMD LEDs (Epistar Chips). Long life of LED bulbs. Charging Time- 12hrs from Solar, 10hrs from Charger. Working Time- 9 hrs.', '1536513523.jpeg', 1),
-(7, 'SKU-1536514175467', 'LED Lantern Big', '1000', 'Big', 'Solar', 'Solar Product', 'Gee Lite', '1630', '1630', '0', 'Led watts 2.5W -5.5 Watts  High and Low mode through Switch Back up - 10 hours at High mode and 20 hours at Low mode Battery 6 Volt 5AH', '1536514531.jpeg', 1);
+INSERT INTO `products` (`id`, `product_code`, `product_name`, `product_unit`, `product_size`, `product_category`, `product_subcategory`, `product_brand`, `product_cost`, `product_dealerprice`, `product_tax`, `product_description`, `product_images`, `gp_commission`, `taluk_commission`, `dist_commission`, `zone_commission`, `status`) VALUES
+(1, 'SKU-1531328997147', 'productName', '9900', '3x4x5', 'Shirts', 'Checked Shirts', 'Gucci', '12000', '11000', '5', 'product description', '1534440015.jpg,1534440015.png,1534440015.jpg', NULL, NULL, NULL, NULL, 1),
+(2, 'SKU-1531329234582', 'productName1', '40', '3x4x7', 'Shirts', 'Checked Shirts', 'Gucci', '1200', '1000', '5', 'product description details', '1534440015.jpg,1534440015.png,1534440015.jpg', NULL, NULL, NULL, NULL, 1),
+(3, 'SKU-1531331120512', 'productName3', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'Gucci', '12000', '12000', '5', 'product descriptions 90', '1534440015.jpg,1534440015.png,1534440015.jpg', NULL, NULL, NULL, NULL, 1),
+(4, 'SKU-1531331249225', 'productName3', '100', '3x4x7', 'Shirts', 'Checked Shirts', 'Gucci', '12000', '11000', '5', 'product description', '1534440015.jpg,1534440015.png,1534440015.jpg', NULL, NULL, NULL, NULL, 1),
+(5, 'SKU-1534439714661', 'SareGaMa Tees', '100', '3x4x5', 'T-Shirts', 'Round Tees', 'Gucci', '299', '249', '5', 'round tees', '1534440015.jpg,1534440015.png,1534440015.jpg', NULL, NULL, NULL, NULL, 1),
+(6, 'SKU-1536513007879', 'GL LED Lantern', '1000', '28M', 'Solar', 'Solar Product', 'Gee Lite', '840', '840', '5', 'Power output 1.5 Watt. Powered by 28Pcs 3014 SMD LEDs (Epistar Chips). Long life of LED bulbs. Charging Time- 12hrs from Solar, 10hrs from Charger. Working Time- 9 hrs.', '1536513523.jpeg', NULL, NULL, NULL, NULL, 1),
+(7, 'SKU-1536514175467', 'LED Lantern Big', '1000', 'Big', 'Solar', 'Solar Product', 'Gee Lite', '1630', '1630', '0', 'Led watts 2.5W -5.5 Watts  High and Low mode through Switch Back up - 10 hours at High mode and 20 hours at Low mode Battery 6 Volt 5AH', '1536514531.jpeg', NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -213,21 +217,28 @@ CREATE TABLE IF NOT EXISTS `service_request` (
   `service_date` varchar(15) NOT NULL,
   `customer_name` varchar(100) NOT NULL,
   `customer_mobile` varchar(15) NOT NULL,
+  `customer_pan` varchar(10) DEFAULT NULL,
+  `customer_aadhar` varchar(20) DEFAULT NULL,
   `customer_address` text NOT NULL,
   `payment_mode` varchar(20) NOT NULL,
   `amount_paid` int(10) DEFAULT NULL,
   `amount_due` int(10) DEFAULT NULL,
+  `transaction_id` varchar(30) DEFAULT NULL,
   `userkey` varchar(10) DEFAULT NULL,
   `status` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_request`
 --
 
-INSERT INTO `service_request` (`id`, `service_no`, `service_name`, `service_amount`, `service_date`, `customer_name`, `customer_mobile`, `customer_address`, `payment_mode`, `amount_paid`, `amount_due`, `userkey`, `status`) VALUES
-(7, 'SR-6953', 'Pan Card', 100, '11/08/2018', 'Suman Dinda', '08050986742', 'SIruseri', 'cash', 100, 0, 'hSDAeop', 1);
+INSERT INTO `service_request` (`id`, `service_no`, `service_name`, `service_amount`, `service_date`, `customer_name`, `customer_mobile`, `customer_pan`, `customer_aadhar`, `customer_address`, `payment_mode`, `amount_paid`, `amount_due`, `transaction_id`, `userkey`, `status`) VALUES
+(7, 'SR-6953', 'Pan Card', 100, '11/08/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'SIruseri', 'cash', 100, 0, NULL, 'hSDAeop', 1),
+(8, 'SR-887', 'UdyogaSanjeevini', 200, '01/10/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1),
+(9, 'SR-7377', 'UdyogaSanjeevini', 200, '01/10/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', '', 200, 0, NULL, 'hSDAeop', 1),
+(10, 'SR-3279', 'UdyogaSanjeevini', 200, '01/10/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1),
+(11, 'SR-4340', 'PAN', 200, '02/10/2018', 'Suman Dinda', '08050986742', 'canpd4572r', '881567890986', 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1);
 
 -- --------------------------------------------------------
 
@@ -240,15 +251,21 @@ CREATE TABLE IF NOT EXISTS `service_types` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `service_name` varchar(20) NOT NULL,
   `service_price` varchar(20) NOT NULL,
+  `gp_commission` int(10) DEFAULT NULL,
+  `taluk_commission` int(10) DEFAULT NULL,
+  `dist_commission` int(10) DEFAULT NULL,
+  `zone_commission` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_types`
 --
 
-INSERT INTO `service_types` (`id`, `service_name`, `service_price`) VALUES
-(1, 'Pan Card', '100');
+INSERT INTO `service_types` (`id`, `service_name`, `service_price`, `gp_commission`, `taluk_commission`, `dist_commission`, `zone_commission`) VALUES
+(1, 'PAN', '200', NULL, NULL, NULL, NULL),
+(2, 'UdyogaSanjeevini', '200', NULL, NULL, NULL, NULL),
+(3, 'GST', '1000', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -330,6 +347,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `u_subordinates` text,
   `u_usertype` varchar(15) DEFAULT NULL,
   `u_assignedto` varchar(20) DEFAULT NULL,
+  `commission` int(10) DEFAULT NULL,
   `u_usercreationdate` datetime DEFAULT NULL,
   `u_userdatachanged` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `u_userstatus` int(3) NOT NULL,
@@ -340,13 +358,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`u_id`, `u_email`, `u_password`, `u_mobile`, `u_unique`, `u_firstname`, `u_lastname`, `u_fathersname`, `u_dob`, `u_pan`, `u_aadhar`, `u_district`, `u_taluk`, `u_address`, `u_pincode`, `b_accno`, `b_ifsc`, `b_acctype`, `b_bank`, `u_subordinates`, `u_usertype`, `u_assignedto`, `u_usercreationdate`, `u_userdatachanged`, `u_userstatus`) VALUES
-(1, 'lovelysin1990@gmail.com', 'gramp', '8249011206', 'hSDAeop', 'gram', 'panchayat1', 'fathers name', '06/06/2000', 'canpd4972r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456789045678', 'sbin002123', 'savings', 'axis bank', '', 'gram_panchayat', 'zIlL7Vs', '2018-06-29 20:45:56', '2018-06-29 20:45:56', 1),
-(2, 'lovelysin1990@gmail.com', 'dnrpia74', '8249011206', 'QMGG22g', 'grampanchayat', '2', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', 'zIlL7Vs', '2018-06-29 21:55:44', '2018-06-29 21:55:44', 1),
-(3, 'lovelysin1990@gmail.com', 'qlewjtzg', '8249011206', '2M9pbuo', 'grampanchayat', '3', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', NULL, '2018-06-29 22:00:50', '2018-06-29 22:00:50', 1),
-(4, 'foodoku.in@gmail.com', 'racsw02s', '8050986742', 'FwSE0P0', 'grampanchayat', '4', 'ttyrytetettyey', '07/16/2013', 'canpd497r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456786', '23456', 'current', 'icici', '', 'gram_panchayat', NULL, '2018-06-29 22:04:50', '2018-06-29 22:04:50', 1),
-(5, 'sumandinda123@gmail.com', 'taluk', '8050986742', 'zIlL7Vs', 'talukdar', '1', 'fathersname', '07/15/1999', 'vadsdfsfd45465', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '12rwerwerwerwer', 'ifsccode', 'savings', 'bank name', '1,2', 'taluk_head', 'HcNJNav', '2018-06-30 05:20:00', '2018-06-30 05:20:00', 1),
-(6, 'sumandinda123@gmail.com', 'z2ms02pl', '8050986742', 'HcNJNav', 'districthead', '1', 'fathersname', '07/25/2018', 'canpf454564e', '', 'district', 'Chennai', 'SIruseri', 603103, '1234567890-', 'sbin002123', 'savings', 'axis bank', '5', 'district_head', NULL, '2018-07-21 13:32:14', '2018-07-21 13:32:14', 1);
+INSERT INTO `users` (`u_id`, `u_email`, `u_password`, `u_mobile`, `u_unique`, `u_firstname`, `u_lastname`, `u_fathersname`, `u_dob`, `u_pan`, `u_aadhar`, `u_district`, `u_taluk`, `u_address`, `u_pincode`, `b_accno`, `b_ifsc`, `b_acctype`, `b_bank`, `u_subordinates`, `u_usertype`, `u_assignedto`, `commission`, `u_usercreationdate`, `u_userdatachanged`, `u_userstatus`) VALUES
+(1, 'lovelysin1990@gmail.com', 'gramp', '8249011206', 'hSDAeop', 'gram', 'panchayat1', 'fathers name', '06/06/2000', 'canpd4972r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456789045678', 'sbin002123', 'savings', 'axis bank', '', 'gram_panchayat', 'zIlL7Vs', NULL, '2018-06-29 20:45:56', '2018-06-29 20:45:56', 1),
+(2, 'lovelysin1990@gmail.com', 'dnrpia74', '8249011206', 'QMGG22g', 'grampanchayat', '2', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', 'zIlL7Vs', NULL, '2018-06-29 21:55:44', '2018-06-29 21:55:44', 1),
+(3, 'lovelysin1990@gmail.com', 'qlewjtzg', '8249011206', '2M9pbuo', 'grampanchayat', '3', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', NULL, NULL, '2018-06-29 22:00:50', '2018-06-29 22:00:50', 1),
+(4, 'foodoku.in@gmail.com', 'racsw02s', '8050986742', 'FwSE0P0', 'grampanchayat', '4', 'ttyrytetettyey', '07/16/2013', 'canpd497r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456786', '23456', 'current', 'icici', '', 'gram_panchayat', NULL, NULL, '2018-06-29 22:04:50', '2018-06-29 22:04:50', 1),
+(5, 'sumandinda123@gmail.com', 'taluk', '8050986742', 'zIlL7Vs', 'talukdar', '1', 'fathersname', '07/15/1999', 'vadsdfsfd45465', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '12rwerwerwerwer', 'ifsccode', 'savings', 'bank name', '1,2', 'taluk_head', 'HcNJNav', NULL, '2018-06-30 05:20:00', '2018-06-30 05:20:00', 1),
+(6, 'sumandinda123@gmail.com', 'z2ms02pl', '8050986742', 'HcNJNav', 'districthead', '1', 'fathersname', '07/25/2018', 'canpf454564e', '', 'district', 'Chennai', 'SIruseri', 603103, '1234567890-', 'sbin002123', 'savings', 'axis bank', '5', 'district_head', NULL, NULL, '2018-07-21 13:32:14', '2018-07-21 13:32:14', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

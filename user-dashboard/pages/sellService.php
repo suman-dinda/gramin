@@ -99,7 +99,15 @@
                         <div class="col-md-6">
                           <div class="form-group">
                               <label for="payment_mode">Payment Mode</label>
-                              <input type="text" ng-model="formData.payment_mode" id="payment_mode" class="form-control">
+                              <!-- <input type="text" ng-model="formData.payment_mode" id="payment_mode" class="form-control"> -->
+                              <select class="form-control" ng-model="formData.payment_mode" id="payment_mode" ng-change="inputTrxId(formData.payment_mode)">
+                                <option value="cash">Cash</option>
+                                <option value="online">Online</option>
+                              </select>
+                          </div>
+                          <div class="form-group" ng-if="trx == true">
+                              <label for="transactionId">Transaction ID</label>
+                              <input type="text" ng-model="formData.transactionId" id="transactionId" class="form-control" required>
                           </div>
                           <div class="form-group">
                               <label for="amount_paid">Amount Paid</label>

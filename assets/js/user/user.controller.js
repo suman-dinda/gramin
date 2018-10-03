@@ -458,6 +458,7 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 	$scope.formData.service  = "Service Name";
 	$scope.formData.service_cost = "0.00";
 	$scope.inputVisible = true;
+	$scope.trx = false;
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
 	$scope.formData.service_no = "SR-"+x;
@@ -601,13 +602,14 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		
 		var serviceData = dataPassing.getData();
 		$scope.srvData.service_no = serviceData.service_no;
+		$scope.srvData.sell_date = serviceData.service_date;
 		$scope.srvData.status = serviceData.status;
 		if($scope.srvData.status == '2'){
 			$scope.srvData.prevAmount = serviceData.amount_paid;
 			$scope.srvData.amount_due = 0;
 			$scope.srvData.amount_paid = serviceData.amount_due;
 		}else{
-			$scope.srvData.amount_due = serviceData.amount_due;
+			$scope.srvData.amount_due = 0+ +serviceData.amount_due;
 			$scope.srvData.amount_paid = serviceData.amount_paid;
 		}
 		$scope.srvData.service_cost = serviceData.service_amount;
@@ -622,6 +624,15 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		
 		dataPassing.setData($scope.srvData);
 	}
+
+	$scope.inputTrxId = function(payment_mode){
+		if(payment_mode == "online"){
+			$scope.trx = true;
+		}else{
+			$scope.trx = false;
+		}
+	}
+
 });
 
 //profileController

@@ -66,7 +66,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label for="sell_date">Date</label>
-                              <input type="text" class="form-control datepicker" name="sell_date" id="sell_date" ng-model="srvData.sell_date" required>
+                              <input type="text" class="form-control" name="sell_date" id="sell_date" ng-model="srvData.sell_date" required readonly>
                             </div>
                           </div>
                       </div>

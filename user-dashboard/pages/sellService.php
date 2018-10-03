@@ -27,10 +27,22 @@
                           <div class="col-md-6">
                               <div class="form-group" >
                                   <label for="service">Service Name</label>
-                                  <input type="text" name="service" id="service" ng-model="formData.service" class="form-control" readonly>
-                                 <!--  <select ng-model="formData.service" id="service" class="form-control select2" data-ng-options="srv as srv.service_name for srv in services" ng-change="getServiceAmount(formData.service)">
+                                  <input type="text" name="service" id="service" ng-model="formData.service" class="form-control" ng-if = "inputVisible == true;" readonly>
+                                  <select ng-model="formData.service" id="service" class="form-control select2" ng-change="getServiceTypes(formData.service)" ng-if="service == 'eSikshana'" placeholder="Select E-Sikshana Service">
                                       <option value="" selected>Select Service</option>
-                                  </select> -->
+                                      <option value="UPSC">UPSC</option>
+                                      <option value="KPSC">KPSC</option>
+                                      <option value="Banking">Banking</option>
+                                  </select>
+                                  <select ng-model="formData.service" id="service" class="form-control select2" ng-change="getServiceTypes(formData.service)" ng-if="service == 'eGovernance'" placeholder="Select E-Governance Service">
+                                      <option value="" selected>Select Service</option>
+                                      <option value="Income Certificate">Income Certificate</option>
+                                      <option value="Living Certificate">Living Certificate</option>
+                                      <option value="Domecile Certificate">Domecile Certificate</option>
+                                      <option value="Non Tenancy Certificate">Non Tenancy Certificate</option>
+                                      <option value="Residence Certificate">Residence Certificate</option>
+                                      <option value="Minority Certificate">Minority Certificate</option>
+                                  </select>
                               </div>
                               <div class="form-group">
                                   <label for="service_cost">Service Cost</label>

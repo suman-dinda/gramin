@@ -488,6 +488,10 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 			var obj = data[0];
 			$scope.formData.service = obj.service_name;
 			$scope.formData.service_cost = obj.service_price;
+			$scope.formData.gp_commission = obj.gp_commission;
+			$scope.formData.taluk_commission = obj.taluk_commission;
+			$scope.formData.dist_commission = obj.dist_commission;
+			$scope.formData.zone_commission = obj.zone_commission;
 		});
 	}
 	
@@ -498,6 +502,10 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 			var obj = data[0];
 			$scope.formData.service = obj.service_name;
 			$scope.formData.service_cost = obj.service_price;
+			$scope.formData.gp_commission = obj.gp_commission;
+			$scope.formData.taluk_commission = obj.taluk_commission;
+			$scope.formData.dist_commission = obj.dist_commission;
+			$scope.formData.zone_commission = obj.zone_commission;
 		});
 	}
 	

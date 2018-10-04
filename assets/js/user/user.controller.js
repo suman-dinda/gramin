@@ -1,8 +1,9 @@
 app.run(function($rootScope,dataPassing,$cookies){
 	$rootScope.key = dataPassing.getCookie('userkey');
-	if(localStorage.getItem('cart') == null){
+	if(localStorage.getItem('cart') == 'null' || localStorage.getItem('cart') == null){
 		$rootScope.cart = [];
 		$rootScope.total = 0;
+		
 	}else{
 		$rootScope.cart = JSON.parse(localStorage.getItem('cart'));
 		$rootScope.total = JSON.parse(localStorage.getItem('total'));

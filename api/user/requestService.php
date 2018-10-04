@@ -53,8 +53,8 @@ if($amount_due > 0){
 	get Users from gp user key
 */
 	
-// $sql = "INSERT INTO `service_request` (`service_no`,`service_name`,`service_amount`,`service_date`,`customer_name`,`customer_mobile`,`customer_pan`,`customer_aadhar`,`customer_address`,`payment_mode`,`amount_paid`,`amount_due`,`transaction_id`,`userkey`,`status`) VALUES ('$service_no','$service_name','$service_cost','$sell_date','$customer_name','$customer_contact','$customer_pan','$customer_aadhar','$customer_add','$payment_mode','$amount_paid','$amount_due','$transaction_id','$user_unique','$status')";
+$sql = "INSERT INTO `service_request` (`service_no`,`service_name`,`service_amount`,`service_date`,`customer_name`,`customer_mobile`,`customer_pan`,`customer_aadhar`,`customer_address`,`payment_mode`,`amount_paid`,`amount_due`,`transaction_id`,`userkey`,`status`) VALUES ('$service_no','$service_name','$service_cost','$sell_date','$customer_name','$customer_contact','$customer_pan','$customer_aadhar','$customer_add','$payment_mode','$amount_paid','$amount_due','$transaction_id','$user_unique','$status')";
 
-// $result = $conn->execute($sql);
-// print($result);
+$result = $conn->execute($sql);
+print($result);
 ?>

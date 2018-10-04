@@ -10,10 +10,16 @@
 			//echo $userPercent.", ".$billAmount.". ".$userType;
 			$amount = $userPercent * $billAmount;
 			$user_unique = $_COOKIE['userkey'];
+			$status ="";
 			$userString = $this -> getSubOrdinateUser($user_unique, $userType);
 			$userKey = trim(preg_replace('/\s\s+/', ' ', $userString));
-			echo $userString." UserKey:".$userKey;
-			$status = $this -> updateCommission($userkey,$amount);
+
+			if($userKey == ''){
+				// echo "helo";
+			}else{
+				$status = $this -> updateCommission($userKey,$amount);
+			}
+			
 			return $status;
 		}
 		
@@ -29,16 +35,14 @@
 		}
 
 		function getSubOrdinateUser($gpUserKey, $user_type){
-			echo $gpUserKey."][][".$user_type;
+			//echo $gpUserKey."][][".$user_type;
 			$conn = new Connection();
 			$user = "";
-			$userType = $this ->$user_type;
 			$response = $conn -> getAll("CALL `getUsers`('$gpUserKey');");
 			$nbrUsers = count($response);
 			if($nbrUsers >0){
-				foreach ($response as $res) {
-						$user = $res['$userType'];
-				}
+				$res = $response[0];
+				$user = $res[$user_type];
 				return $user;
 			}else{
 				return "No Data Found";

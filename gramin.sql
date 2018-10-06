@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 03, 2018 at 07:30 PM
+-- Generation Time: Oct 06, 2018 at 06:23 AM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `gramin`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `getUsers`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUsers` (IN `gpUser` VARCHAR(10))  BEGIN
+SET @gp = gpUser;
+SET @taluk := (SELECT `u_assignedto` FROM `users` WHERE `u_unique` = @gp);
+SET @dist := (SELECT `u_assignedto` FROM `users` WHERE `u_unique` = @taluk);
+SET @zone := (SELECT `u_assignedto` FROM `users` WHERE `u_unique` = @dist);
+SELECT @gp AS gp, @taluk AS taluk_head, @dist AS  dist_head, @zone AS zone_head;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -205,6 +220,29 @@ INSERT INTO `sales` (`id`, `sale_no`, `sale_chalan`, `sale_date`, `sale_customer
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `service_category`
+--
+
+DROP TABLE IF EXISTS `service_category`;
+CREATE TABLE IF NOT EXISTS `service_category` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(20) NOT NULL,
+  `category_code` varchar(20) DEFAULT NULL,
+  `status` int(2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `service_category`
+--
+
+INSERT INTO `service_category` (`id`, `category_name`, `category_code`, `status`) VALUES
+(1, 'E-Sikshana', 'eSikshana', 1),
+(2, 'E-Governance', 'eGovernance', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `service_request`
 --
 
@@ -227,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `service_request` (
   `userkey` varchar(10) DEFAULT NULL,
   `status` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_request`
@@ -238,7 +276,8 @@ INSERT INTO `service_request` (`id`, `service_no`, `service_name`, `service_amou
 (8, 'SR-887', 'UdyogaSanjeevini', 200, '01/10/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1),
 (9, 'SR-7377', 'UdyogaSanjeevini', 200, '01/10/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', '', 200, 0, NULL, 'hSDAeop', 1),
 (10, 'SR-3279', 'UdyogaSanjeevini', 200, '01/10/2018', 'Suman Dinda', '08050986742', NULL, NULL, 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1),
-(11, 'SR-4340', 'PAN', 200, '02/10/2018', 'Suman Dinda', '08050986742', 'canpd4572r', '881567890986', 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1);
+(11, 'SR-4340', 'PAN', 200, '02/10/2018', 'Suman Dinda', '08050986742', 'canpd4572r', '881567890986', 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, NULL, 'hSDAeop', 1),
+(12, 'SR-298', 'UdyogaSanjeevini', 200, '04/10/2018', 'Suman Dinda', '08050986742', '', '', 'Newgen Softaware Technologies Plot No 13 D17\nSipcot It Park, Siruseri', 'cash', 200, 0, '', 'hSDAeop', 1);
 
 -- --------------------------------------------------------
 
@@ -250,22 +289,28 @@ DROP TABLE IF EXISTS `service_types`;
 CREATE TABLE IF NOT EXISTS `service_types` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `service_name` varchar(20) NOT NULL,
-  `service_price` varchar(20) NOT NULL,
-  `gp_commission` int(10) DEFAULT NULL,
-  `taluk_commission` int(10) DEFAULT NULL,
-  `dist_commission` int(10) DEFAULT NULL,
-  `zone_commission` int(10) DEFAULT NULL,
+  `service_category` varchar(30) DEFAULT 'default',
+  `service_price` varchar(10) NOT NULL,
+  `gp_commission` int(10) DEFAULT '0',
+  `taluk_commission` int(10) DEFAULT '0',
+  `dist_commission` int(10) DEFAULT '0',
+  `zone_commission` int(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_types`
 --
 
-INSERT INTO `service_types` (`id`, `service_name`, `service_price`, `gp_commission`, `taluk_commission`, `dist_commission`, `zone_commission`) VALUES
-(1, 'PAN', '200', NULL, NULL, NULL, NULL),
-(2, 'UdyogaSanjeevini', '200', NULL, NULL, NULL, NULL),
-(3, 'GST', '1000', NULL, NULL, NULL, NULL);
+INSERT INTO `service_types` (`id`, `service_name`, `service_category`, `service_price`, `gp_commission`, `taluk_commission`, `dist_commission`, `zone_commission`) VALUES
+(1, 'PAN', 'default', '200', NULL, NULL, NULL, NULL),
+(2, 'UdyogaSanjeevini', 'default', '200', 3, 5, 5, 5),
+(3, 'GST', 'default', '1000', NULL, NULL, NULL, NULL),
+(4, 'UPSC', 'eSikshana', '10', 0, 0, 0, 0),
+(5, 'KPSC', 'eSikshana', '10', 0, 0, 0, 0),
+(6, 'Banking', 'eSikshana', '10', 0, 0, 0, 0),
+(7, 'Income Certificate', 'eGovernance', '40', 0, 0, 0, 0),
+(8, 'Minority Certificate', 'eGovernance', '50', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -347,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `u_subordinates` text,
   `u_usertype` varchar(15) DEFAULT NULL,
   `u_assignedto` varchar(20) DEFAULT NULL,
-  `commission` int(10) DEFAULT NULL,
+  `commission` int(10) DEFAULT '0',
   `u_usercreationdate` datetime DEFAULT NULL,
   `u_userdatachanged` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `u_userstatus` int(3) NOT NULL,
@@ -359,12 +404,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`u_id`, `u_email`, `u_password`, `u_mobile`, `u_unique`, `u_firstname`, `u_lastname`, `u_fathersname`, `u_dob`, `u_pan`, `u_aadhar`, `u_district`, `u_taluk`, `u_address`, `u_pincode`, `b_accno`, `b_ifsc`, `b_acctype`, `b_bank`, `u_subordinates`, `u_usertype`, `u_assignedto`, `commission`, `u_usercreationdate`, `u_userdatachanged`, `u_userstatus`) VALUES
-(1, 'lovelysin1990@gmail.com', 'gramp', '8249011206', 'hSDAeop', 'gram', 'panchayat1', 'fathers name', '06/06/2000', 'canpd4972r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456789045678', 'sbin002123', 'savings', 'axis bank', '', 'gram_panchayat', 'zIlL7Vs', NULL, '2018-06-29 20:45:56', '2018-06-29 20:45:56', 1),
-(2, 'lovelysin1990@gmail.com', 'dnrpia74', '8249011206', 'QMGG22g', 'grampanchayat', '2', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', 'zIlL7Vs', NULL, '2018-06-29 21:55:44', '2018-06-29 21:55:44', 1),
-(3, 'lovelysin1990@gmail.com', 'qlewjtzg', '8249011206', '2M9pbuo', 'grampanchayat', '3', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', NULL, NULL, '2018-06-29 22:00:50', '2018-06-29 22:00:50', 1),
-(4, 'foodoku.in@gmail.com', 'racsw02s', '8050986742', 'FwSE0P0', 'grampanchayat', '4', 'ttyrytetettyey', '07/16/2013', 'canpd497r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456786', '23456', 'current', 'icici', '', 'gram_panchayat', NULL, NULL, '2018-06-29 22:04:50', '2018-06-29 22:04:50', 1),
-(5, 'sumandinda123@gmail.com', 'taluk', '8050986742', 'zIlL7Vs', 'talukdar', '1', 'fathersname', '07/15/1999', 'vadsdfsfd45465', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '12rwerwerwerwer', 'ifsccode', 'savings', 'bank name', '1,2', 'taluk_head', 'HcNJNav', NULL, '2018-06-30 05:20:00', '2018-06-30 05:20:00', 1),
-(6, 'sumandinda123@gmail.com', 'z2ms02pl', '8050986742', 'HcNJNav', 'districthead', '1', 'fathersname', '07/25/2018', 'canpf454564e', '', 'district', 'Chennai', 'SIruseri', 603103, '1234567890-', 'sbin002123', 'savings', 'axis bank', '5', 'district_head', NULL, NULL, '2018-07-21 13:32:14', '2018-07-21 13:32:14', 1);
+(1, 'lovelysin1990@gmail.com', 'gramp', '8249011206', 'hSDAeop', 'gram', 'panchayat1', 'fathers name', '06/06/2000', 'canpd4972r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456789045678', 'sbin002123', 'savings', 'axis bank', '', 'gram_panchayat', 'zIlL7Vs', 54, '2018-06-29 20:45:56', '2018-06-29 20:45:56', 1),
+(2, 'lovelysin1990@gmail.com', 'dnrpia74', '8249011206', 'QMGG22g', 'grampanchayat', '2', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', 'zIlL7Vs', 0, '2018-06-29 21:55:44', '2018-06-29 21:55:44', 1),
+(3, 'lovelysin1990@gmail.com', 'qlewjtzg', '8249011206', '2M9pbuo', 'grampanchayat', '3', 'ttyrytetettyey', '07/01/1998', 'qwee12333', '123456789012', 'district', 'Bangalore', 'Near Miami SuperMarket, Munekolala\nMarathahalli', 560037, '123456676676', 'ihbvc455', 'current', 'hdfc', '', 'gram_panchayat', NULL, 0, '2018-06-29 22:00:50', '2018-06-29 22:00:50', 1),
+(4, 'foodoku.in@gmail.com', 'racsw02s', '8050986742', 'FwSE0P0', 'grampanchayat', '4', 'ttyrytetettyey', '07/16/2013', 'canpd497r', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '123456786', '23456', 'current', 'icici', '', 'gram_panchayat', NULL, 0, '2018-06-29 22:04:50', '2018-06-29 22:04:50', 1),
+(5, 'sumandinda123@gmail.com', 'taluk', '8050986742', 'zIlL7Vs', 'talukdar', '1', 'fathersname', '07/15/1999', 'vadsdfsfd45465', '123456789012', 'district', 'Chennai', 'Newgen Softaware', 603103, '12rwerwerwerwer', 'ifsccode', 'savings', 'bank name', '1,2', 'taluk_head', 'HcNJNav', 90, '2018-06-30 05:20:00', '2018-06-30 05:20:00', 1),
+(6, 'sumandinda123@gmail.com', 'z2ms02pl', '8050986742', 'HcNJNav', 'districthead', '1', 'fathersname', '07/25/2018', 'canpf454564e', '', 'district', 'Chennai', 'SIruseri', 603103, '1234567890-', 'sbin002123', 'savings', 'axis bank', '5', 'district_head', NULL, 90, '2018-07-21 13:32:14', '2018-07-21 13:32:14', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

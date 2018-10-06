@@ -15,7 +15,7 @@ app.config(function($routeProvider) {
     .when("/sell_service", {
         templateUrl : "pages/sellService.php"
     })
-    .when("/sell_service/:serviceName", {
+    .when("/sell_service/:categoryName/:serviceName", {
         templateUrl : "pages/sellService.php"
     })
     .when("/service_list", {

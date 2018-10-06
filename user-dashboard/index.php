@@ -248,7 +248,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!sell_service/UdyogaSanjeevini"><i class="fa fa-circle-o"></i> Udyoga Sanjeevini Service</a></li>
+            <li class=""><a href="#!sell_service/default/UdyogaSanjeevini"><i class="fa fa-circle-o"></i> Udyoga Sanjeevini Service</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -260,7 +260,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
           </a>
           <ul class="treeview-menu">
             <li class=""><a href="#!showProducts/E-Sikshana"><i class="fa fa-circle-o"></i> E-Sikshana Products</a></li>
-            <li class=""><a href="#!sell_service/eSikshana"><i class="fa fa-circle-o"></i> E-Sikshana Service</a></li>
+            <li class=""><a href="#!sell_service/category/eSikshana"><i class="fa fa-circle-o"></i> E-Sikshana Service</a></li>
           </ul>
         </li>
          <li class="treeview">
@@ -282,7 +282,7 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!sell_service/eGovernance"><i class="fa fa-circle-o"></i> E-Governance Service</a></li>
+            <li class=""><a href="#!sell_service/category/eGovernance"><i class="fa fa-circle-o"></i> E-Governance Service</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -359,8 +359,8 @@ if(isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE[
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class=""><a href="#!sell_service/PAN"><i class="fa fa-circle-o"></i> PAN Service</a></li>
-            <li class=""><a href="#!sell_service/GST"><i class="fa fa-circle-o"></i> GST Service</a></li>
+            <li class=""><a href="#!sell_service/default/PAN"><i class="fa fa-circle-o"></i> PAN Service</a></li>
+            <li class=""><a href="#!sell_service/default/GST"><i class="fa fa-circle-o"></i> GST Service</a></li>
           </ul>
         </li>
       </ul>

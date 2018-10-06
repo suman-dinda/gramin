@@ -3,7 +3,7 @@ app.run(function($rootScope,dataPassing,$cookies){
 	if(localStorage.getItem('cart') == 'null' || localStorage.getItem('cart') == null){
 		$rootScope.cart = [];
 		$rootScope.total = 0;
-		
+
 	}else{
 		$rootScope.cart = JSON.parse(localStorage.getItem('cart'));
 		$rootScope.total = JSON.parse(localStorage.getItem('total'));
@@ -452,13 +452,37 @@ app.controller("salesController", function($scope,$rootScope,$filter,dataPassing
 app.controller("sellService",function($scope,$rootScope,$location,dataPassing,serviceManagement,userManagement,$routeParams){
 	$scope.titl = "Sell Service";
 	$scope.ServiceList = "Service List";
-	$scope.service = $routeParams.serviceName;
+	$scope.serviceCategory = $routeParams.categoryName;
+	$scope.inputVisible = true;
+	if($scope.serviceCategory == 'default'){
+		$scope.service = $routeParams.serviceName;
+		$scope.inputVisible = true;
+		serviceManagement.getService($scope.service)
+		.then(function(data){
+			var obj = data[0];
+			$scope.formData.service = obj.service_name;
+			$scope.formData.service_cost = obj.service_price;
+			$scope.formData.gp_commission = obj.gp_commission;
+			$scope.formData.taluk_commission = obj.taluk_commission;
+			$scope.formData.dist_commission = obj.dist_commission;
+			$scope.formData.zone_commission = obj.zone_commission;
+		});
+	}else{
+		$scope.service = $routeParams.serviceName;
+		$scope.inputVisible = false;
+		serviceManagement.getServiceListFromCategory($scope.service)
+		.then(function(data){
+			$scope.categoryList = data;
+		});
+
+	}
+	
 	$scope.formData = {};
 	$scope.srvData = {};
 	$scope.userKey = $rootScope.key;
 	$scope.formData.service  = "Service Name";
 	$scope.formData.service_cost = "0.00";
-	$scope.inputVisible = true;
+	
 	$scope.trx = false;
 	var date = new Date();
 	var x = Math.floor((Math.random() * 10000) + 1);
@@ -480,21 +504,6 @@ app.controller("sellService",function($scope,$rootScope,$location,dataPassing,se
 		$scope.formData.userFullName = data;
 		$scope.srvData.userFullName = data;
 	});
-	if($scope.service == "eSikshana" || $scope.service == "eGovernance"){
-		$scope.inputVisible = false;
-	}else{
-		$scope.inputVisible = true;
-		serviceManagement.getService($scope.service)
-		.then(function(data){
-			var obj = data[0];
-			$scope.formData.service = obj.service_name;
-			$scope.formData.service_cost = obj.service_price;
-			$scope.formData.gp_commission = obj.gp_commission;
-			$scope.formData.taluk_commission = obj.taluk_commission;
-			$scope.formData.dist_commission = obj.dist_commission;
-			$scope.formData.zone_commission = obj.zone_commission;
-		});
-	}
 	
 
 	$scope.getServiceTypes = function(serviceName){

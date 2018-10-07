@@ -84,4 +84,16 @@ app.service("serviceManagement",function($http,$log){
             throw response;
 	    });
 	 }
+	 this.getServiceCategory = function(serviceName){
+	 	return $http({
+	        method : "POST",
+	        url : "../api/getServiceCategory.php",
+	        headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+	    }).then(function success(response) {
+	        return response.data;
+	    }, function error(response) {
+	        $log.error('ERROR:', response);
+            throw response;
+	    });
+	 }
 });

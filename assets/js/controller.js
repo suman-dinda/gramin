@@ -244,6 +244,15 @@ app.controller('createService',function($scope,serviceManagement){
 	$scope.title = "Create Service";
 	$scope.serviceData = {};
 
+	$scope.populateDopdownValues = function(){
+		serviceManagement.getServiceCategory()
+		.then(function(data){
+			$scope.servCat = data;
+			
+		})
+	}
+	
+
 	$scope.createNewService = function(){
 		serviceManagement.createService($scope.serviceData)
 		.then(function(data){
@@ -253,7 +262,7 @@ app.controller('createService',function($scope,serviceManagement){
 				},{
 					type: 'success'
 				});
-				$('#createUserForm')[0].reset();
+				$('#createServiceForm')[0].reset();
 			}else{
 				$.notify({
 					message: 'Error in adding service' 

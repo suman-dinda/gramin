@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 06, 2018 at 06:23 AM
+-- Generation Time: Oct 07, 2018 at 07:14 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `service_types` (
   `dist_commission` int(10) DEFAULT '0',
   `zone_commission` int(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `service_types`
@@ -310,7 +310,8 @@ INSERT INTO `service_types` (`id`, `service_name`, `service_category`, `service_
 (5, 'KPSC', 'eSikshana', '10', 0, 0, 0, 0),
 (6, 'Banking', 'eSikshana', '10', 0, 0, 0, 0),
 (7, 'Income Certificate', 'eGovernance', '40', 0, 0, 0, 0),
-(8, 'Minority Certificate', 'eGovernance', '50', 0, 0, 0, 0);
+(8, 'Minority Certificate', 'eGovernance', '50', 0, 0, 0, 0),
+(9, 'GST2', 'default', '100', 2, 3, 4, 5);
 
 -- --------------------------------------------------------
 

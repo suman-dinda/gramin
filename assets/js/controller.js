@@ -224,7 +224,14 @@ app.controller('createUser',function($scope,$routeParams,userManagement){
 					location.reload();
 				},1000);
 				$('#createUserForm')[0].reset();
-			}else{
+			}else if($scope.response == '407'){
+				$.notify({
+					message: 'ERROR ! E-Mail Already Exist' 
+				},{
+					type: 'danger'
+				});
+			}
+			else{
 				$.notify({
 					message: 'ERROR ! User Couldnot Be Added' 
 				},{

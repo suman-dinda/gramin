@@ -45,52 +45,29 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <form id="ulogin-form" method="post">
-      <p class="login-box-msg">Sign in to start your session</p>
+    <form id="changepwd-form" method="post">
+      <p class="login-box-msg">Kindly Type New Credentials</p>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" placeholder="Username">
-        <span class="glyphicon glyphicon-envelope form-control-feedback" required></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" name="password" placeholder="Password">
+        <input type="text" class="form-control" name="password" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback" required></span>
       </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="confirmpassword" placeholder="Confirm Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback" required></span>
+      </div>
+      <span id="msg"></span>
       <div class="row">
         <div class="col-xs-8">
           
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Update</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
     <!-- /.social-auth-links -->
-
-
-    <!-- forgot pwd -->
-
-    <form id="fpwd-form" method="post">
-      <p class="login-box-msg">Get Password Reset Link</p>
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" name="email" placeholder="EMail" required>
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-6">
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-6">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Get Reset Link</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-    <a href="#" id="fpwd_btn">I forgot my password</a>
-    <a href="#" id="login_btn">Login</a><br>
-    <!-- <a href="register.html" class="text-center">Register a new membership</a> -->
 
   </div>
   <!-- /.login-box-body -->
@@ -107,11 +84,10 @@
 <script type="text/javascript" src="../assets/js/jsscript.js"></script>
 <script>
   $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var tokenId = url.searchParams.get("c");
+    var token = url.searchParams.get("c");
   });
 </script>
 </body>

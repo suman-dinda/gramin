@@ -42,12 +42,18 @@
                     </section> -->
                     <section class="footer-buttons center">
                         <div class="row">
+                          <div class="col-md-6 col-xs-6"><button type="button" class="btn btn-primary" ng-click="addToCart(prd)"><i class="fa fa-shopping-cart fa-fw"></i></button></div>
+                          <div class="col-md-6 col-xs-6"><a ng-href="#!product_details/{{prd.id}}" class="btn btn-danger"><i class="fa fa-eye fa-fw"></i></a></div>
+                        </div>
+                    </section>
+                    <!-- <section class="footer-buttons center">
+                        <div class="row">
                           <div class="col-md-6 col-xs-6">
-                            <!-- <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart fa-fw"></i></button> -->
+                            <button type="button" class="btn btn-primary"><i class="fa fa-shopping-cart fa-fw"></i></button>
                           </div>
                           <div class="col-md-6 col-xs-6"><button type="button" ng-click="viewProduct(prd)" class="btn btn-danger"><i class="fa fa-eye fa-fw"></i></button></div>
                         </div>
-                    </section>
+                    </section> -->
                   </div>
                 </div>
               </div>

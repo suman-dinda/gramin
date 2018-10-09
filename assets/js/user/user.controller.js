@@ -1,6 +1,6 @@
 app.run(function($rootScope,dataPassing,$cookies){
 	$rootScope.key = dataPassing.getCookie('userkey');
-	if(localStorage.getItem('cart') == 'null' || localStorage.getItem('cart') == null){
+	if(localStorage.getItem('cart') == 'null' || localStorage.getItem('cart') == null || localStorage.getItem('cart') == ""){
 		$rootScope.cart = [];
 		$rootScope.total = 0;
 
@@ -69,7 +69,7 @@ app.run(function($rootScope,dataPassing,$cookies){
        		expireDate.setDate(expireDate.getDate() + 1);
  			localStorage.setItem('cart', $rootScope.cart); 
  			// $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
- 			 $rootScope.cart = $cookies.getObject('cart');
+ 			 $rootScope.cart = localStorage.getItem('cart');
 		     
 		   }
 		   
@@ -97,8 +97,12 @@ app.controller('dashboardController', function($scope,$http,$location,dataPassin
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
 	$scope.subown = 'true';
-	$rootScope.total = JSON.parse(window.localStorage.getItem('total'));
-	$scope.cart = JSON.parse(window.localStorage.getItem('cart'));
+	if(window.localStorage.getItem('total') != ""){
+		$rootScope.total = JSON.parse(window.localStorage.getItem('total'));
+	}
+	if(window.localStorage.getItem('cart') != ""){
+		$scope.cart = JSON.parse(window.localStorage.getItem('cart'));
+	}
 
 	if($scope.cart !== null){
 		$scope.cartCount = $scope.cart.length;
@@ -712,6 +716,11 @@ app.controller("showSingleProduct",function($scope,$rootScope,productManagement,
 	        }); 
 	 	});
 	 }
+
+	  $scope.addToCart = function(product){
+		$rootScope.addtoCart(product);
+	}
+
 });
 
 app.controller("productDetails",function($scope,$rootScope,productManagement,$routeParams){

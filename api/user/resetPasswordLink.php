@@ -33,9 +33,9 @@ $host = $_SERVER['SERVER_NAME'];
         $retval = mail ($to,$subject,$message,$header);
          
          if( $retval == true ) {
-            echo "Message sent successfully...";
+            echo "true";
          }else {
-            echo "Message could not be sent...";
+            echo "Message could not be sent";
          }
 
 

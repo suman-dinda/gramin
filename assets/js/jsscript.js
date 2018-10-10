@@ -82,16 +82,16 @@ $('#fpwd-form').on('submit',function(e){
 	    processData: false,
 	    type: 'POST',
 	    success: function(data){
-	    	if(data == "Login Successful"){
+	    	if(data == "true"){
 	    		$.notify({
-					message: 'Login Successful. Redirecting...' 
+					message: 'Link Has Been Send To Your Mail. Check Your Mailbox' 
 				},{
 					type: 'success'
 				});
 				setTimeout(function(){ location.href="../user-dashboard"; }, 2000);
 	    	}else{
 	    		$.notify({
-					message: 'Login Failed' 
+					message: data
 				},{
 					type: 'danger'
 				});
@@ -104,3 +104,47 @@ $('#fpwd-form').on('submit',function(e){
 	});
 
 })
+
+$('#password,#confirmpassword').on('keyup', function(){
+	var pwd = $('#password').val();
+	var conpwd = $('#confirmpassword').val();
+
+	if (pwd == conpwd) {
+		$('#msg').text('');
+	}else{
+		$('#msg').text("Password Did Not Match");
+	}
+});
+
+$('#changepwd-form').submit(function(e){
+	e.preventDefault();
+	var pwdData = new FormData($('#changepwd-form')[0]);
+
+	$.ajax({
+	    url: '../api/user/updatePassword.php',
+	    data: pwdData,
+	    contentType: false,
+	    processData: false,
+	    type: 'POST',
+	    success: function(data){
+	    	if(data == "true"){
+	    		$.notify({
+					message: 'Password Updated. Redirecting...' 
+				},{
+					type: 'success'
+				});
+				setTimeout(function(){ location.href="../user"; }, 2000);
+	    	}else{
+	    		$.notify({
+					message: data 
+				},{
+					type: 'danger'
+				});
+	    	}
+	        
+	    },
+	    error: function(error){
+	    	alert("Error"+error);
+	    }
+	});
+});

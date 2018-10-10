@@ -86,8 +86,10 @@
   $(function () {
     var url_string = window.location.href;
     var url = new URL(url_string);
-    var tokenId = url.searchParams.get("c");
-    var token = url.searchParams.get("c");
+    var tokenId = url.searchParams.get("tokenId");
+    var token = url.searchParams.get("token");
+    sessionStorage.setItem("tokenId",tokenId);
+    sessionStorage.setItem("token",token);
   });
 </script>
 </body>

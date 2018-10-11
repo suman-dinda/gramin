@@ -40,9 +40,7 @@ app.run(function($rootScope,dataPassing,$cookies){
 		$rootScope.total += parseFloat(product.product_cost);
 		localStorage.setItem('total',JSON.stringify($rootScope.total));
       	//$cookies.put('total', $rootScope.total,  {'expires': expireDate});
-      	$rootScope.$watch($rootScope.cart, function() {
-	    console.log("**** reference checkers $watch ****")
-	  });
+      	
       	//$rootScope.digest();
 
 	  	$.notify({
@@ -58,25 +56,25 @@ app.run(function($rootScope,dataPassing,$cookies){
 		    product.count -= 1;
 		    var expireDate = new Date();
          	expireDate.setDate(expireDate.getDate() + 1);
-         	localStorage.setItem('cart', $rootScope.cart);
+         	localStorage.setItem('cart', JSON.stringify($rootScope.cart));
 		    //$cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
- 			$rootScope.cart = localStorage.getItem('cart');
+ 			$rootScope.cart = JSON.parse(localStorage.getItem('cart'));
 		   }
 		   else if(product.count === 1){
 		    var index = $rootScope.cart.indexOf(product);
  			$rootScope.cart.splice(index, 1);
  			expireDate = new Date();
        		expireDate.setDate(expireDate.getDate() + 1);
- 			localStorage.setItem('cart', $rootScope.cart); 
+ 			localStorage.setItem('cart', JSON.stringify($rootScope.cart)); 
  			// $cookies.putObject('cart', $rootScope.cart, {'expires': expireDate});
- 			 $rootScope.cart = localStorage.getItem('cart');
+ 			 $rootScope.cart = JSON.parse(localStorage.getItem('cart'));
 		     
 		   }
-		   
+		   $rootScope.total = localStorage.getItem('total');
 		   $rootScope.total -= parseFloat(product.product_cost);
        	//$cookies.put('total', $rootScope.total,  {'expires': expireDate});
        	localStorage.setItem('total',JSON.stringify($rootScope.total));
-		   
+		localStorage.setItem('total',JSON.stringify($rootScope.total));   
 		 };
 });
 app.filter('stockFilter',function(dataPassing){
@@ -97,6 +95,9 @@ app.controller('dashboardController', function($scope,$http,$location,dataPassin
 	$scope.titl = "User Dashboard";
 	$scope.userType = dataPassing.getCookie('user_type');
 	$scope.subown = 'true';
+	$rootScope.$watch($rootScope.cart, function() {
+	    console.log("**** reference checkers $watch ****")
+	});
 	if(window.localStorage.getItem('total') != ""){
 		$rootScope.total = JSON.parse(window.localStorage.getItem('total'));
 	}

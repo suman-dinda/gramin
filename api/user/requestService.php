@@ -29,20 +29,28 @@ $user_unique = $_COOKIE['userkey'];
 
 
 /*
-	commission value calculation
+	commission value calculation and update
 */
+if(isset($_REQUEST['gp_commission'])){
 	$gpCommission	= ((int)$_REQUEST['gp_commission']/100);
-	$talukCommission = ((int)$_REQUEST['taluk_commission']/100);
-	$distCommission	= ((int)$_REQUEST['dist_commission']/100);
-	$zoneCommission = ((int)$_REQUEST['zone_commission']/100);
-
 	$gpCommissionAmount = $comsn -> calculateCommission($gpCommission,$amount_paid,"gp");
+}
+if(isset($_REQUEST['taluk_commission'])){
+	$talukCommission = ((int)$_REQUEST['taluk_commission']/100);
 	$talukCommissionAmount = $comsn -> calculateCommission($talukCommission,$amount_paid,"taluk_head");
+}
+if(isset($_REQUEST['dist_commission'])){
+	$distCommission	= ((int)$_REQUEST['dist_commission']/100);
 	$distCommissionAmount = $comsn -> calculateCommission($distCommission,$amount_paid,"dist_head");
+}
+if(isset($_REQUEST['zone_commission'])){
+	$zoneCommission = ((int)$_REQUEST['zone_commission']/100);
 	$zoneCommissionAmount = $comsn -> calculateCommission($zoneCommission,$amount_paid,"zone_head");
+}
 
-	
-
+/*
+	commission part end here
+*/
 
 if($amount_due > 0){
 	$status = 2;

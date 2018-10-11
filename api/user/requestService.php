@@ -4,7 +4,6 @@ include_once '../../server/commission.php';
 $conn = new Connection();
 $comsn = new Commission();
 $jsonData = array();
-
 $customer_add = $_REQUEST['customer_add'];
 $customer_contact  = $_REQUEST['customer_contact'];
 $customer_name = $_REQUEST['customer_name'];
@@ -25,33 +24,18 @@ if(isset($_REQUEST['transactionId'])){
 	$transaction_id = $_REQUEST['transactionId'];
 }else{$transaction_id="";}
 $user_unique = $_COOKIE['userkey'];
-
-
-
 /*
-	commission value calculation and update
+	commission value calculation
 */
-if(isset($_REQUEST['gp_commission'])){
 	$gpCommission	= ((int)$_REQUEST['gp_commission']/100);
-	$gpCommissionAmount = $comsn -> calculateCommission($gpCommission,$amount_paid,"gp");
-}
-if(isset($_REQUEST['taluk_commission'])){
 	$talukCommission = ((int)$_REQUEST['taluk_commission']/100);
-	$talukCommissionAmount = $comsn -> calculateCommission($talukCommission,$amount_paid,"taluk_head");
-}
-if(isset($_REQUEST['dist_commission'])){
 	$distCommission	= ((int)$_REQUEST['dist_commission']/100);
-	$distCommissionAmount = $comsn -> calculateCommission($distCommission,$amount_paid,"dist_head");
-}
-if(isset($_REQUEST['zone_commission'])){
 	$zoneCommission = ((int)$_REQUEST['zone_commission']/100);
+	$gpCommissionAmount = $comsn -> calculateCommission($gpCommission,$amount_paid,"gp");
+	$talukCommissionAmount = $comsn -> calculateCommission($talukCommission,$amount_paid,"taluk_head");
+	$distCommissionAmount = $comsn -> calculateCommission($distCommission,$amount_paid,"dist_head");
 	$zoneCommissionAmount = $comsn -> calculateCommission($zoneCommission,$amount_paid,"zone_head");
-}
-
-/*
-	commission part end here
-*/
-
+	
 if($amount_due > 0){
 	$status = 2;
 }else{
@@ -62,7 +46,6 @@ if($amount_due > 0){
 */
 	
 $sql = "INSERT INTO `service_request` (`service_no`,`service_name`,`service_amount`,`service_date`,`customer_name`,`customer_mobile`,`customer_pan`,`customer_aadhar`,`customer_address`,`payment_mode`,`amount_paid`,`amount_due`,`transaction_id`,`userkey`,`status`) VALUES ('$service_no','$service_name','$service_cost','$sell_date','$customer_name','$customer_contact','$customer_pan','$customer_aadhar','$customer_add','$payment_mode','$amount_paid','$amount_due','$transaction_id','$user_unique','$status')";
-
 $result = $conn->execute($sql);
 print($result);
 ?>
